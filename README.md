@@ -2,12 +2,10 @@
 
 [Project Homepage](http://dev.laubenberger.net/wichtel/)  
 [Repository](http://repo.laubenberger.net/maven2/)
-***
 
 ## Description
 A small Java7+ library to help you build better and faster applications.  
 The intention of this library is to replace my older project [Bogatyr](http://code.google.com/p/bogatyr/).
-***
 
 ## How to install it
 Just download the jar and add it to your project or use maven for dependency management:
@@ -29,12 +27,9 @@ Just download the jar and add it to your project or use maven for dependency man
          </dependency>
          ...
       </dependencies>
-***
 
 ## Known problems
 none
-***
 
 ## Notes
 none
-***
