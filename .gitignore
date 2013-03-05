@@ -1,0 +1,13 @@
+target
+/.idea
+/*.iml
+/.idea_modules
+/.classpath
+/.project
+
+# Linux specific
+*swp
+
+# Mac specific
+.DS_Store
+

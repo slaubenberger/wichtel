@@ -1,0 +1,3 @@
+Hello world!
+
+This is a "wichtel" TEXT test file for open, edit and print with the default system application.
