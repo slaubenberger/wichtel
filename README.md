@@ -1,4 +1,4 @@
-# wichtel 0.0.1
+# wichtel 0.0.2
 
 [Project Homepage](http://dev.laubenberger.net/wichtel/)  
 [Repository](http://repo.laubenberger.net/maven2/)
@@ -24,7 +24,7 @@ Just download the library from the **build** folder and add it to your project o
          <dependency>
             <groupId>net.laubenberger.wichtel</groupId>
             <artifactId>wichtel</artifactId>
-            <version>0.0.1</version>
+            <version>0.0.2</version>
             <scope>compile</scope>
          </dependency>
          ...

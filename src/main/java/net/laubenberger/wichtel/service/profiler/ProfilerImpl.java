@@ -40,7 +40,7 @@ import net.laubenberger.wichtel.service.ServiceAbstract;
  * The implementation of a profiler.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-10
  * @since 0.0.1
  */
 public class ProfilerImpl<T> extends ServiceAbstract implements Profiler<T> {
@@ -66,8 +66,16 @@ public class ProfilerImpl<T> extends ServiceAbstract implements Profiler<T> {
 	public long getElapsedTime() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(elapsedTime));
-		return elapsedTime;
+		long result;
+		
+		if (0L == elapsedTime) { //no profile()-call made
+			result = System.nanoTime() - meanTime;
+		} else {
+			result = elapsedTime;
+		}
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
@@ -83,7 +91,7 @@ public class ProfilerImpl<T> extends ServiceAbstract implements Profiler<T> {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(event));
 
 		final long currentTime = System.nanoTime();
-		final long result = currentTime - meanTime;
+		final long result = System.nanoTime() - meanTime;
 		profiles.put(event, result);
 
 		elapsedTime += result;
@@ -98,8 +106,9 @@ public class ProfilerImpl<T> extends ServiceAbstract implements Profiler<T> {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		profiles.clear();
+		elapsedTime = 0L;
 		meanTime = System.nanoTime();
-
+		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }
