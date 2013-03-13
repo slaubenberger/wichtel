@@ -57,14 +57,14 @@ import org.slf4j.LoggerFactory;
  * This is an implementation for hash code generation.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-13
  * @since 0.0.1
  */
 public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
 	private static final Logger log = LoggerFactory.getLogger(HashCodeGeneratorImpl.class);
 
-	private static final int DEFAULT_PARTS = 16;
-	private static final int DEFAULT_PARTSIZE = 2048;
+	private static final int DEFAULT_PARTS = 32;
+	private static final int DEFAULT_PARTSIZE = Constants.DEFAULT_FILE_BUFFER_SIZE;
 
 	private final MessageDigest md;
 

@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
  * Collected constants of very general utility.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-13
  * @since 0.0.1
  */
 public abstract class Constants {
@@ -59,7 +59,7 @@ public abstract class Constants {
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
 	public static final MathContext DEFAULT_MATHCONTEXT = new MathContext(34, RoundingMode.DOWN);
-	public static final int DEFAULT_FILE_BUFFER_SIZE = HelperNumber.NUMBER_32768.intValue(); //32kB
+	public static final int DEFAULT_FILE_BUFFER_SIZE = HelperNumber.NUMBER_65536.intValue(); //64kB
 	public static final BigDecimal DEFAULT_DPI = new BigDecimal("72"); //$NON-NLS-1$
 
 //	//algebraic signs
@@ -174,10 +174,10 @@ public abstract class Constants {
 	static {
 		try {
 			WICHTEL.setName("wichtel"); //$NON-NLS-1$
-			WICHTEL.setVersion("0.0.1"); //$NON-NLS-1$
+			WICHTEL.setVersion("0.0.2"); //$NON-NLS-1$
 			WICHTEL.setBuild(1);
 			WICHTEL.setCreated(HelperTime.getDate(2013, 3, 5, 22, 50, 0));
-			WICHTEL.setChanged(HelperTime.getDate(2013, 3, 5, 22, 50, 0));
+			WICHTEL.setChanged(HelperTime.getDate(2013, 3, 13, 18, 40, 0));
 			WICHTEL.setLanguage(Language.ENGLISH);
 			WICHTEL.setUUID(UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5")); //$NON-NLS-1$
 			WICHTEL.setUrl(new URL("http://www.laubenberger.net/")); //$NON-NLS-1$

@@ -3,7 +3,7 @@
 	<groupId>net.laubenberger</groupId>
 	<artifactId>wichtel</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>wichtel</name>
 	<description>wichtel Java library</description>
 	<url>http://dev.laubenberger.net/wichtel/</url>

@@ -37,7 +37,7 @@ import net.laubenberger.wichtel.service.Service;
  * This is an interface for hash code generation.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-13
  * @since 0.0.1
  */
 public interface HashCodeGenerator extends Service {
@@ -113,9 +113,9 @@ public interface HashCodeGenerator extends Service {
 	byte[] getFastHash(byte[] input, int parts, int partSize);
 
 	/**
-	 * Generates a hash code for a byte-array with the standard settings.
+	 * Generates a hash code for a byte-array with the standard settings (error rate less than 0.02%).
 	 * This method generates a fast hash code over the data (e.g. compare different data)
-	 * <p/>
+	 * <p>
 	 * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
 	 *
 	 * @param input byte-array for the hash code
@@ -127,7 +127,7 @@ public interface HashCodeGenerator extends Service {
 	/**
 	 * Generates a fast hash code for an input {@link File}.
 	 * This method generates a fast hash code over the {@link File} (e.g. find same file containing the same data)
-	 * <p/>
+	 * <p>
 	 * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
 	 *
 	 * @param input	 {@link File} for the hash code
@@ -141,9 +141,9 @@ public interface HashCodeGenerator extends Service {
 	byte[] getFastHash(File input, int parts, int partSize) throws IOException;
 
 	/**
-	 * Generates a fast hash code for an input {@link File} with standard settings.
+	 * Generates a fast hash code for an input {@link File} with standard settings (error rate less than 0.02%).
 	 * This method generates a fast hash code over the {@link File} (e.g. find same file containing the same data)
-	 * <p/>
+	 * <p>
 	 * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
 	 *
 	 * @param input {@link File} for the hash code
