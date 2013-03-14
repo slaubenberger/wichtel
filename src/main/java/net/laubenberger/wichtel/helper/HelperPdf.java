@@ -68,7 +68,7 @@ import com.lowagie.text.pdf.parser.PdfTextExtractor;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperPdf {
@@ -76,7 +76,8 @@ public abstract class HelperPdf {
 
 	private static final String IMAGE_TYPE = HelperImage.TYPE_PNG;
 
-	//does not work with 
+	//TODO write PDF from word/excel etc.
+	
 //	/**
 //	 * Writes a PDF from multiple (X)HTML files to a {@link File}.
 //	 * <strong>Note:</strong> This method needs <a
@@ -159,9 +160,8 @@ public abstract class HelperPdf {
 
 		final Document document = new Document(pageSize);
 		document.setMargins(0.0F, 0.0F, 0.0F, 0.0F);
-		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
 
-		try {
+		try (FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file))) {
 			PdfWriter.getInstance(document, fos);
 			document.open();
 
@@ -177,9 +177,8 @@ public abstract class HelperPdf {
 				document.add(image);
 				document.newPage();
 			}
-		} finally {
+			
 			document.close();
-			fos.close();
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
@@ -221,9 +220,7 @@ public abstract class HelperPdf {
 		final Document document = new Document(pageSize);
 		document.setMargins(0.0F, 0.0F, 0.0F, 0.0F);
 
-		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
-
-		try {
+		try (FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file))) {
 			PdfWriter.getInstance(document, fos);
 			document.open();
 
@@ -239,9 +236,6 @@ public abstract class HelperPdf {
 				document.add(image);
 				document.newPage();
 			}
-		} finally {
-			document.close();
-			fos.close();
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
@@ -315,14 +309,8 @@ public abstract class HelperPdf {
 			throw new RuntimeExceptionIsNull("pptFile"); //$NON-NLS-1$
 		}
 		
-		InputStream is = null;
-		try {
-			is = new FileInputStream(pptFile);
+		try (InputStream is = new FileInputStream(pptFile)) {
 			writePdfFromPpt(pageSize, scale, file, new SlideShow(is));
-		} finally {
-			if (null != is) {
-				is.close();
-			}
 		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
@@ -394,24 +382,17 @@ public abstract class HelperPdf {
 			throw new RuntimeExceptionIsNull("metadata"); //$NON-NLS-1$
 		}
 
-		PdfReader reader = null;
-		PdfStamper stamper = null;
-
-		try {
-			reader = new PdfReader(source.getAbsolutePath());
-			stamper = new PdfStamper(reader, new FileOutputStream(dest));
+		try (FileOutputStream fos = new FileOutputStream(dest)){
+			PdfReader reader = new PdfReader(source.getAbsolutePath());
+			PdfStamper stamper = new PdfStamper(reader, fos);
 
 			final HashMap<String, String> info = reader.getInfo();
 			info.putAll(metadata);
 
 			stamper.setMoreInfo(info);
-		} finally {
-			if (null != stamper) {
-				stamper.close();
-			}
-			if (null != reader) {
-				reader.close();
-			}
+			
+			stamper.close();
+			reader.close();
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
@@ -491,19 +472,14 @@ public abstract class HelperPdf {
 		}
 		
 		PdfReader reader = null;
-		OutputStream os = null;
 
-		try {
+		try (OutputStream os = new FileOutputStream(dest)) {
 			reader = new PdfReader(source.getAbsolutePath());
-			os = new FileOutputStream(dest);
 
 			PdfEncryptor.encrypt(reader, os, user, password, PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY | PdfWriter.ALLOW_DEGRADED_PRINTING
 					| PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_MODIFY_ANNOTATIONS | PdfWriter.ALLOW_MODIFY_CONTENTS
 					| PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, true);
 		} finally {
-			if (null != os) {
-				os.close();
-			}
 			if (null != reader) {
 				reader.close();
 			}
@@ -566,17 +542,12 @@ public abstract class HelperPdf {
 		}
 		
 		PdfReader reader = null;
-		OutputStream os = null;
 
-		try {
+		try (OutputStream os = new FileOutputStream(dest)) {
 			reader = new PdfReader(source.getAbsolutePath());
-			os = new FileOutputStream(dest);
 
 			PdfEncryptor.encrypt(reader, os, null , password, 0, true);
 		} finally {
-			if (null != os) {
-				os.close();
-			}
 			if (null != reader) {
 				reader.close();
 			}
@@ -617,19 +588,14 @@ public abstract class HelperPdf {
 		}
 		
 		PdfReader reader = null;
-		OutputStream os = null;
 
-		try {
+		try (OutputStream os = new FileOutputStream(dest)) {
 			reader = new PdfReader(source.getAbsolutePath(), password);
-			os = new FileOutputStream(dest);
 
 			PdfEncryptor.encrypt(reader, os, null, null, PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY
 					| PdfWriter.ALLOW_DEGRADED_PRINTING | PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_MODIFY_ANNOTATIONS
 					| PdfWriter.ALLOW_MODIFY_CONTENTS | PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, true);
 		} finally {
-			if (null != os) {
-				os.close();
-			}
 			if (null != reader) {
 				reader.close();
 			}

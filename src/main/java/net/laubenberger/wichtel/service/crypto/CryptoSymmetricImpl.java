@@ -74,9 +74,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This is a class for symmetric cryptology via AES.
-  *
+ *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmetric {
@@ -327,21 +327,14 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 		}
 
 		final byte[] buffer = new byte[bufferSize];
-		CipherInputStream cis = null;
 
-		try {
+		try (CipherInputStream cis = new CipherInputStream(is, cipher)) {
 //			cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(cipher.getIV()));
 			cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
-			cis = new CipherInputStream(is, cipher);
 
 			int offset;
 			while (0 <= (offset = cis.read(buffer))) {
 				os.write(buffer, 0, offset);
-			}
-		} finally {
-			os.close();
-			if (null != cis) {
-				cis.close();
 			}
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
@@ -369,20 +362,9 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		BufferedInputStream bis = null;
-		BufferedOutputStream bos = null;
-
-		try {
-			bis = new BufferedInputStream(new FileInputStream(input));
-			bos = new BufferedOutputStream(new FileOutputStream(output));
+		try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(input));
+			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(output))) {
 			encrypt(bis, bos, key, bufferSize);
-		} finally {
-			if (null != bos) {
-				bos.close();
-			}
-			if (null != bis) {
-				bis.close();
-			}
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
@@ -409,20 +391,9 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		BufferedInputStream bis = null;
-		BufferedOutputStream bos = null;
-
-		try {
-			bis = new BufferedInputStream(new FileInputStream(input));
-			bos = new BufferedOutputStream(new FileOutputStream(output));
+		try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(input));
+			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(output))) {
 			decrypt(bis, bos, key, bufferSize);
-		} finally {
-			if (null != bos) {
-				bos.close();
-			}
-			if (null != bis) {
-				bis.close();
-			}
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}

@@ -50,31 +50,28 @@ import org.slf4j.LoggerFactory;
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public class PropertyImpl extends ServiceAbstract implements Property {
 	private static final Logger log = LoggerFactory.getLogger(PropertyImpl.class);
 
-	private final Properties properties;
+	private Properties properties;
 
 	public PropertyImpl(final InputStream inputStream, final String encoding) throws IOException {
 		super();
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(inputStream));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(inputStream, encoding));
 
-		if (null == inputStream) {
-			throw new RuntimeExceptionIsNull("inputStream"); //$NON-NLS-1$
-		}
-		if (null == encoding) {
-			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
-		}
-		
-		properties = new Properties();
-		properties.load(new InputStreamReader(inputStream, encoding));
+		load(inputStream, encoding);
 	}
 
 	public PropertyImpl(final File file, final String encoding) throws IOException {
-		this(new BufferedInputStream(new FileInputStream(file)), encoding);
+		super();
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(file, encoding));
+	
+		try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file))) {
+			load(bis, encoding);
+		}
 	}
 
 	public PropertyImpl(final InputStream inputStream) throws IOException {
@@ -84,7 +81,24 @@ public class PropertyImpl extends ServiceAbstract implements Property {
 	public PropertyImpl(final File file) throws IOException {
 		this(file, Constants.ENCODING_DEFAULT);
 	}
+	
+	private void load(final InputStream inputStream, final String encoding) throws IOException {
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(inputStream, encoding));
 
+		if (null == inputStream) {
+			throw new RuntimeExceptionIsNull("inputStream"); //$NON-NLS-1$
+		}
+		if (null == encoding) {
+			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
+		}
+		
+		properties = new Properties();
+		try (InputStreamReader isr = new InputStreamReader(inputStream, encoding)) {
+			properties.load(isr);
+		}
+		
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
+	}
 	
 	/*
 	 * Implemented methods

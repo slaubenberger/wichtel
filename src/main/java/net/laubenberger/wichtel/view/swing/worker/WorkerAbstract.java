@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
 public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker {
 	private static final Logger log = LoggerFactory.getLogger(WorkerAbstract.class);
 
-	private final Collection<ListenerWorker> listeners = new HashSet<ListenerWorker>();
+	private final Collection<ListenerWorker> listeners = new HashSet<>();
 
 	private final Event<Worker> event = new Event<Worker>(this);
 

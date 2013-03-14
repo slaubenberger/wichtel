@@ -47,7 +47,7 @@ import org.junit.Test;
  * JUnit test for {@link LauncherProcess}
  * 
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  */
 public class LauncherProcessTest {
 	private File fileOutput;
@@ -169,7 +169,7 @@ public class LauncherProcessTest {
 		}
 	}
 	
-	private void sleep() {
+	private static void sleep() {
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException ex) {

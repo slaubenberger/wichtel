@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
  * Helper class for time operations.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperTime {
@@ -117,13 +117,9 @@ public abstract class HelperTime {
 			throw new RuntimeExceptionIsEmpty("host"); //$NON-NLS-1$
 		}
 
-		Socket socket = null;
-		InputStream is = null;
-
-		try {
-			socket = new Socket(host, TIME_SERVER_PORT);
+		try (Socket socket = new Socket(host, TIME_SERVER_PORT);
+				InputStream is = socket.getInputStream()) {
 			socket.setSoTimeout(TIMEOUT);
-			is = socket.getInputStream();
 
 			long time = 0L;
 
@@ -135,14 +131,6 @@ public abstract class HelperTime {
 
 			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
-		} finally {
-			if (null != is) {
-				is.close();
-			}
-
-			if (null != socket) {
-				socket.close();
-			}
 		}
 	}
 

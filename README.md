@@ -1,6 +1,5 @@
 # wichtel 0.0.2
 
-[Project Homepage](http://dev.laubenberger.net/wichtel/)  
 [Repository](http://repo.laubenberger.net/maven2/)
 
 ## Description

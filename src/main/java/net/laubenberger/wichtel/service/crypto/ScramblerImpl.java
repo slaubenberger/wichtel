@@ -53,7 +53,7 @@ import net.laubenberger.wichtel.service.ServiceAbstract;
  * This is a class for obfuscating data with CFB.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public class ScramblerImpl extends ServiceAbstract implements Scrambler {
@@ -92,9 +92,9 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 
 		final byte[] result = new byte[input.length];
 
-		result[0] = (byte) (input[0] ^ (int) pattern);
+		result[0] = (byte) (input[0] ^ pattern);
 		for (int ii = 1; ii < input.length; ii++) {
-			result[ii] = (byte) (input[ii] ^ (int) result[ii - 1]);
+			result[ii] = (byte) (input[ii] ^ result[ii - 1]);
 		}
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
@@ -122,9 +122,9 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 
 		final byte[] result = new byte[input.length];
 
-		result[0] = (byte) (input[0] ^ (int) pattern);
+		result[0] = (byte) (input[0] ^ pattern);
 		for (int ii = 1; ii < input.length; ii++) {
-			result[ii] = (byte) (input[ii] ^ (int) input[ii - 1]);
+			result[ii] = (byte) (input[ii] ^ input[ii - 1]);
 		}
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
@@ -150,12 +150,8 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 
 		final byte[] buffer = new byte[bufferSize];
 
-		InputStream is = null;
-		OutputStream os = null;
-
-		try {
-			is = new FileInputStream(input);
-			os = new FileOutputStream(output);
+		try (InputStream is = new FileInputStream(input);
+			OutputStream os = new FileOutputStream(output)) {
 			int offset;
 			byte lastByte = pattern;
 			while (0 < (offset = is.read(buffer))) {
@@ -167,13 +163,6 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 				lastByte = result[result.length - 1];
 			}
 			os.flush();
-		} finally {
-			if (null != is) {
-				is.close();
-			}
-			if (null != os) {
-				os.close();
-			}
 		}
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
@@ -199,12 +188,8 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 
 		final byte[] buffer = new byte[bufferSize];
 
-		InputStream is = null;
-		OutputStream os = null;
-
-		try {
-			is = new FileInputStream(input);
-			os = new FileOutputStream(output);
+		try (InputStream is = new FileInputStream(input);
+			OutputStream os = new FileOutputStream(output)) {
 			int offset;
 			byte lastByte = pattern;
 			while (0 < (offset = is.read(buffer))) {
@@ -214,13 +199,6 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 				lastByte = buffer[buffer.length - 1];
 			}
 			os.flush();
-		} finally {
-			if (null != is) {
-				is.close();
-			}
-			if (null != os) {
-				os.close();
-			}
 		}
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}

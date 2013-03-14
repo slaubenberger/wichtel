@@ -26,16 +26,10 @@
 
 package net.laubenberger.wichtel.model.misc;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Locale;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import net.laubenberger.wichtel.helper.HelperImage;
 import net.laubenberger.wichtel.helper.HelperObject;
 
 
@@ -44,7 +38,7 @@ import net.laubenberger.wichtel.helper.HelperObject;
  * <strong>Note:</strong> The language is always the main language of a country.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 @XmlRootElement(name = "country")
@@ -158,10 +152,10 @@ public enum Country { //TODO complete the list with all countries
 	VIETNAM(new Locale("vi", "VN")), //$NON-NLS-1$//$NON-NLS-2$
 	YEMEN(new Locale("ar", "YE")); //$NON-NLS-1$//$NON-NLS-2$
 
-	private static final Logger log = LoggerFactory.getLogger(Country.class);
+//	private static final Logger log = LoggerFactory.getLogger(Country.class);
 
 	private final Locale locale;
-	private transient BufferedImage icon;
+//	private transient BufferedImage icon;
 	
 	Country(final Locale locale) {
 		this.locale = locale;

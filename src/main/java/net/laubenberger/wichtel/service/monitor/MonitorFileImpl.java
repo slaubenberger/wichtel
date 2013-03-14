@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
@@ -59,7 +59,7 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 
 	private long interval = 5000L;
 
-	private final Collection<ListenerFileChanged> listeners = new HashSet<ListenerFileChanged>();
+	private final Collection<ListenerFileChanged> listeners = new HashSet<>();
 
 	private final Event<MonitorFile> event = new Event<MonitorFile>(this);
 

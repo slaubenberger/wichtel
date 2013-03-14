@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 @XmlRootElement(name = "model")
@@ -250,7 +250,7 @@ public abstract class ModelAbstract extends Observable implements Model {
 		}
 
 		if (null == mapTag) {
-			mapTag = new HashMap<String, String>();
+			mapTag = new HashMap<>();
 		}
 		mapTag.put(key, value);
 		setChanged();

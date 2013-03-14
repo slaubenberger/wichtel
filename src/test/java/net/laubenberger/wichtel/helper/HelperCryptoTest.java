@@ -52,7 +52,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperCrypto}
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  */
 public class HelperCryptoTest {
 
@@ -62,7 +62,7 @@ public class HelperCryptoTest {
 	public void testGetRandomKey() {
 		assertEquals(16, HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6').length());
 		
-		final Set<String> set = new HashSet<String>(ITERATION);
+		final Set<String> set = new HashSet<>(ITERATION);
 		
 		for (int ii = 0; ITERATION > ii; ii++) {
 		    final String key = HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6');
@@ -102,7 +102,7 @@ public class HelperCryptoTest {
 	public void testGetRandomKeyDefault() {
 		assertEquals(16, HelperCrypto.getRandomKey(16).length());
 
-		final Set<String> set = new HashSet<String>(ITERATION);
+		final Set<String> set = new HashSet<>(ITERATION);
 	        
         for (int ii = 0; ITERATION > ii; ii++) {
             final String key = HelperCrypto.getRandomKey(8);
@@ -124,7 +124,7 @@ public class HelperCryptoTest {
 	public void testGetUUID() {
 	    assertNotNull(HelperCrypto.getUUID());
 	    
-       final Set<UUID> set = new HashSet<UUID>(ITERATION);
+       final Set<UUID> set = new HashSet<>(ITERATION);
         
         for (int ii = 0; ITERATION > ii; ii++) {
             final UUID key = HelperCrypto.getUUID();

@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the worker model.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
@@ -51,7 +51,7 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 
 	private static final Logger log = LoggerFactory.getLogger(ModelWorkerImpl.class);
 
-	private transient List<Worker> workers = new ArrayList<Worker>();
+	private transient List<Worker> workers = new ArrayList<>();
 
 
 	public ModelWorkerImpl() {
@@ -105,7 +105,7 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 			worker.cancel(true);
 		}
 
-		workers = new ArrayList<Worker>();
+		workers = new ArrayList<>();
 		setChanged();
 		notifyObservers(METHOD_REMOVE_ALL);
 

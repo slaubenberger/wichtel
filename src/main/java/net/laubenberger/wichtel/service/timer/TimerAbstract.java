@@ -42,7 +42,7 @@ import net.laubenberger.wichtel.service.ServiceAbstract;
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class TimerAbstract extends ServiceAbstract implements TimeMachine {
@@ -50,7 +50,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 
 	static final long DEFAULT_INTERVAL = 1000L;
 	
-	private final Collection<ListenerTimer> listeners = new HashSet<ListenerTimer>();
+	private final Collection<ListenerTimer> listeners = new HashSet<>();
 
 	private final Event<TimeMachine> event = new Event<TimeMachine>(this);
 

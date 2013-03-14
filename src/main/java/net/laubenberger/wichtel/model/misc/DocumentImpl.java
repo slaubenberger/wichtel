@@ -26,11 +26,8 @@
 package net.laubenberger.wichtel.model.misc;
 
 
-import java.math.BigDecimal;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -38,7 +35,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import net.laubenberger.wichtel.helper.HelperLog;
 import net.laubenberger.wichtel.helper.HelperObject;
-import net.laubenberger.wichtel.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.wichtel.model.ModelAbstract;
 
 import org.slf4j.Logger;
@@ -49,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 @XmlRootElement(name = "document")

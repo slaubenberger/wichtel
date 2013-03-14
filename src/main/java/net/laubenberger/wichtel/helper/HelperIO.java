@@ -67,7 +67,7 @@ import org.slf4j.LoggerFactory;
  * Helper class for disk I/O.
  * 
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperIO {
@@ -305,15 +305,9 @@ public abstract class HelperIO {
 			throw new RuntimeExceptionIsNull("line"); //$NON-NLS-1$
 		}
 
-		PrintWriter pw = null;
-		try {
-			pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file, true), encoding));
+		try (PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file, true), encoding))) {
 			pw.println(line);
 			pw.flush();
-		} finally {
-			if (null != pw) {
-				pw.close();
-			}
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
@@ -374,13 +368,9 @@ public abstract class HelperIO {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
 
-		final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file, append));
-
-		try {
+		try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file, append))) {
 			bos.write(data);
 			bos.flush();
-		} finally {
-			bos.close();
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
@@ -435,18 +425,13 @@ public abstract class HelperIO {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
 
-		final Writer writer = new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(file, append)),
-				encoding);
-
-		try {
+		try (Writer writer = new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(file, append)), encoding)){
 			if (append) {
 				writer.append(data);
 			} else {
 				writer.write(data);
 			}
 			writer.flush();
-		} finally {
-			writer.close();
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
@@ -597,10 +582,9 @@ public abstract class HelperIO {
 
 		final byte[] buffer = new byte[bufferSize];
 
-		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		final byte[] result;
 
-		try {
+		try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 			int x;
 
 			while (-1 != (x = is.read(buffer, 0, bufferSize))) {
@@ -609,8 +593,6 @@ public abstract class HelperIO {
 			baos.flush();
 
 			result = baos.toByteArray();
-		} finally {
-			baos.close();
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -645,17 +627,11 @@ public abstract class HelperIO {
 			throw new RuntimeExceptionExceedsVmMemory("file", file.length()); //$NON-NLS-1$
 		}
 
-		BufferedInputStream bis = null;
 		final byte[] result;
 
-		try {
-			bis = new BufferedInputStream(new FileInputStream(file));
+		try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file))){
 			result = new byte[(int) length];
 			bis.read(result, 0, (int) length);
-		} finally {
-			if (null != bis) {
-				bis.close();
-			}
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -695,11 +671,8 @@ public abstract class HelperIO {
 		}
 
 		final StringBuilder sb = new StringBuilder();
-		BufferedReader br = null;
 
-		try {
-			br = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding));
-
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))) {
 			String line = null;
 
 			while (null != (line = br.readLine())) {
@@ -713,12 +686,6 @@ public abstract class HelperIO {
 
 			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
-		} finally {
-			try {
-				if (null != br) br.close();
-			} catch (IOException ex) {
-				log.error("Could not close the reader", ex); //$NON-NLS-1$
-			}
 		}
 	}
 
@@ -772,12 +739,9 @@ public abstract class HelperIO {
 			throw new RuntimeExceptionExceedsVmMemory("file", file.length()); //$NON-NLS-1$
 		}
 
-		final List<String> result = new ArrayList<String>();
-		BufferedReader br = null;
+		final List<String> result = new ArrayList<>();
 
-		try {
-			br = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding));
-
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))) {
 			String line = null;
 
 			while (null != (line = br.readLine())) {
@@ -786,12 +750,6 @@ public abstract class HelperIO {
 
 			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
-		} finally {
-			try {
-				if (null != br) br.close();
-			} catch (IOException ex) {
-				log.error("Could not close the reader", ex); //$NON-NLS-1$
-			}
 		}
 	}
 
@@ -865,13 +823,7 @@ public abstract class HelperIO {
 			throw new RuntimeExceptionIsEmpty("files"); //$NON-NLS-1$
 		}
 
-		// Create output stream
-		PrintWriter pw = null;
-
-		try {
-			pw = new PrintWriter(new FileOutputStream(fileOutput));
-
-			BufferedReader br = null;
+		try (PrintWriter pw = new PrintWriter(new FileOutputStream(fileOutput))) { //TODO PrintWriter correct?
 
 			// Process all files that are not the destination file
 			for (final File file : files) {
@@ -879,10 +831,7 @@ public abstract class HelperIO {
 					throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 				}
 				if (file.isFile()) {
-					try {
-						// Create input stream
-						br = new BufferedReader(new FileReader(file));
-
+					try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 						// Read each line from the input file
 						String line = br.readLine();
 
@@ -890,16 +839,8 @@ public abstract class HelperIO {
 							pw.println(line);
 							line = br.readLine();
 						}
-					} finally {
-						if (null != br) {
-							br.close();
-						}
 					}
 				}
-			}
-		} finally {
-			if (null != pw) {
-				pw.close();
 			}
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
@@ -936,7 +877,7 @@ public abstract class HelperIO {
 	 */
 	public static List<String> getDriveNames() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-		final List<String> result = new ArrayList<String>(getAvailableDrives().size());
+		final List<String> result = new ArrayList<>(getAvailableDrives().size());
 		final FileSystemView view = FileSystemView.getFileSystemView();
 
 		for (final File file : getAvailableDrives()) {
@@ -1185,7 +1126,7 @@ public abstract class HelperIO {
 			throw new RuntimeExceptionIsNull("path"); //$NON-NLS-1$
 		}
 
-		final List<File> result = new ArrayList<File>();
+		final List<File> result = new ArrayList<>();
 		final File[] entries = path.listFiles();
 		int recurse = recurseDepth;
 
@@ -1359,8 +1300,7 @@ public abstract class HelperIO {
 	/**
 	 * Returns the used space of a given {@link File} path in bytes.
 	 * 
-	 * @param file
-	 *           path
+	 * @param path  Desired path
 	 * @return used space in bytes
 	 * @see File
 	 * @since 0.0.1
@@ -1419,7 +1359,7 @@ public abstract class HelperIO {
 	 * Returns the path of a given file and name.
 	 * 
 	 * @param file
-	 * @param file
+	 * @param name
 	 * @return path of the given file and name
 	 * @see File
 	 * @since 0.0.1
@@ -1499,12 +1439,8 @@ public abstract class HelperIO {
 			dest.createNewFile();
 		}
 
-		InputStream is = null;
-		OutputStream os = null;
-
-		try {
-			is = new FileInputStream(source);
-			os = new FileOutputStream(dest);
+		try (InputStream is = new FileInputStream(source);
+				OutputStream os = new FileOutputStream(dest)) {
 			int len;
 
 			final byte[] buffer = new byte[Constants.DEFAULT_FILE_BUFFER_SIZE];
@@ -1513,13 +1449,6 @@ public abstract class HelperIO {
 				os.write(buffer, 0, len);
 			}
 			os.flush();
-		} finally {
-			if (null != is) {
-				is.close();
-			}
-			if (null != os) {
-				os.close();
-			}
 		}
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}

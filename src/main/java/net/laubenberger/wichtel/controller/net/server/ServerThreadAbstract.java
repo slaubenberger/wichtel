@@ -47,7 +47,7 @@ import net.laubenberger.wichtel.misc.extendedObject.ExtendedObjectAbstract;
  * Skeleton for socket server threads.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implements ServerThread {
@@ -57,7 +57,7 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 
 	private Thread thread;
 
-	private final Collection<ListenerServerThread> listeners = new HashSet<ListenerServerThread>();
+	private final Collection<ListenerServerThread> listeners = new HashSet<>();
 
 	private Socket socket;
 

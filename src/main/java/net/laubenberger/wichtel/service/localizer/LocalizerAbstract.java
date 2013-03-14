@@ -55,7 +55,7 @@ import net.laubenberger.wichtel.service.ServiceAbstract;
 public abstract class LocalizerAbstract extends ServiceAbstract implements Localizer {
 	private static final Logger log = LoggerFactory.getLogger(LocalizerAbstract.class);
 
-	private final Collection<ListenerLocale> listeners = new HashSet<ListenerLocale>();
+	private final Collection<ListenerLocale> listeners = new HashSet<>();
 
 	private final Event<Localizer> event = new Event<Localizer>(this);
 

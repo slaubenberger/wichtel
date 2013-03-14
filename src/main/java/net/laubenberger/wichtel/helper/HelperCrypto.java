@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperCrypto {
@@ -87,7 +87,7 @@ public abstract class HelperCrypto {
 		final StringBuilder sb = new StringBuilder(digits);
 
 		for (int ii = 0; ii < digits; ii++) {
-			sb.append(seed[HelperMath.getRandom(seed.length)]);
+			sb.append(seed[HelperMath.getRandom(seed.length - 1)]);
 		}
 
 		final String result = sb.toString();
@@ -292,7 +292,7 @@ public abstract class HelperCrypto {
 			throw new RuntimeExceptionIsNull("provider"); //$NON-NLS-1$
 		}
 		
-		final Collection<String> result = new HashSet<String>();
+		final Collection<String> result = new HashSet<>();
 
 		for (final Entry<?, ?> pair : provider.entrySet()) {
 			final String entry = (String) pair.getKey();

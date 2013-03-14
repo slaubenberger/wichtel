@@ -45,12 +45,11 @@ import net.laubenberger.wichtel.misc.exception.RuntimeExceptionMustBeGreater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
  * Helper class for compress operations.
- *
+ * 
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperCompress {
@@ -58,33 +57,41 @@ public abstract class HelperCompress {
 
 	/**
 	 * Writes a ZIP {@link File} containing a list of {@link File}.
-	 *
-	 * @param file  for writing
-	 * @param files for the ZIP file
+	 * 
+	 * @param file
+	 *           for writing
+	 * @param files
+	 *           for the ZIP file
 	 * @throws IOException
 	 * @see File
 	 * @since 0.0.1
 	 */
 	public static void writeZip(final File file, final File... files) throws IOException { // $JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, files));
-		
+		if (log.isDebugEnabled())
+			log.debug(HelperLog.methodStart(file, files));
+
 		writeZip(file, files, Constants.DEFAULT_FILE_BUFFER_SIZE);
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+
+		if (log.isDebugEnabled())
+			log.debug(HelperLog.methodExit());
 	}
 
 	/**
 	 * Writes a ZIP {@link File} containing a list of {@link File}.
-	 *
-	 * @param file  for writing
-	 * @param files for the ZIP file
-	 * @param bufferSize in bytes
+	 * 
+	 * @param file
+	 *           for writing
+	 * @param files
+	 *           for the ZIP file
+	 * @param bufferSize
+	 *           in bytes
 	 * @throws IOException
 	 * @see File
 	 * @since 0.0.1
 	 */
 	public static void writeZip(final File file, final File[] files, final int bufferSize) throws IOException { // $JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, files, bufferSize));
+		if (log.isDebugEnabled())
+			log.debug(HelperLog.methodStart(file, files, bufferSize));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -97,62 +104,65 @@ public abstract class HelperCompress {
 		if (1 > bufferSize) {
 			throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
 		}
-//		//check all list entries
-//		for (final File entry : files) {
-//			if (null == entry) {
-//				throw new RuntimeExceptionIsNull("entry"); //$NON-NLS-1$
-//			}
-//			if (!entry.exists()) {
-//				throw new RuntimeExceptionFileNotExist("entry", entry); //$NON-NLS-1$
-//			}
-//		}
-		
-		ZipOutputStream zos = null;
+		// //check all list entries
+		// for (final File entry : files) {
+		// if (null == entry) {
+		//				throw new RuntimeExceptionIsNull("entry"); //$NON-NLS-1$
+		// }
+		// if (!entry.exists()) {
+		//				throw new RuntimeExceptionFileNotExist("entry", entry); //$NON-NLS-1$
+		// }
+		// }
 
-		try {
+		try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(file))){
 			// create a ZipOutputStream to zip the data to
-			zos = new ZipOutputStream(new FileOutputStream(file));
 
 			for (final File entry : files) {
 				addEntry(zos, entry, bufferSize);
 			}
-		} finally {
-			if (null != zos) {
-				zos.close();
-			}
 		}
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled())
+			log.debug(HelperLog.methodExit());
 	}
 
 	/**
 	 * Extracts a ZIP {@link File} to a destination directory.
-	 *
-	 * @param file					  to extract
-	 * @param destinationDirectory for the ZIP file
+	 * 
+	 * @param file
+	 *           to extract
+	 * @param destinationDirectory
+	 *           for the ZIP file
 	 * @throws IOException
 	 * @see File
 	 * @since 0.0.1
 	 */
 	public static void extractZip(final File file, final File destinationDirectory) throws IOException { // $JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, destinationDirectory));
-		
+		if (log.isDebugEnabled())
+			log.debug(HelperLog.methodStart(file, destinationDirectory));
+
 		extractZip(file, destinationDirectory, Constants.DEFAULT_FILE_BUFFER_SIZE);
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+
+		if (log.isDebugEnabled())
+			log.debug(HelperLog.methodExit());
 	}
 
 	/**
 	 * Extracts a ZIP {@link File} to a destination directory.
-	 *
-	 * @param file					  to extract
-	 * @param destinationDirectory for the ZIP file
-	 * @param bufferSize			  in bytes
-	 * @throws IOException 
+	 * 
+	 * @param file
+	 *           to extract
+	 * @param destinationDirectory
+	 *           for the ZIP file
+	 * @param bufferSize
+	 *           in bytes
+	 * @throws IOException
 	 * @see File
 	 * @since 0.0.1
 	 */
-	public static void extractZip(final File file, final File destinationDirectory, final int bufferSize) throws IOException  { // $JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, destinationDirectory, bufferSize));
+	public static void extractZip(final File file, final File destinationDirectory, final int bufferSize)
+			throws IOException { // $JUnit$
+		if (log.isDebugEnabled())
+			log.debug(HelperLog.methodStart(file, destinationDirectory, bufferSize));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -163,22 +173,18 @@ public abstract class HelperCompress {
 			throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
 		}
 
-		final ZipFile zf = new ZipFile(file);
-		
-		final Enumeration<? extends ZipEntry> zipEntryEnum = zf.entries();
+		try (ZipFile zf = new ZipFile(file)) {
+			final Enumeration<? extends ZipEntry> zipEntryEnum = zf.entries();
 
-		try {
 			while (zipEntryEnum.hasMoreElements()) {
 				final ZipEntry zipEntry = zipEntryEnum.nextElement();
-					extractEntry(zf, zipEntry, destinationDirectory, bufferSize);
+				extractEntry(zf, zipEntry, destinationDirectory, bufferSize);
 			}
-		} finally {
-			zf.close();
 		}
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
 
+		if (log.isDebugEnabled())
+			log.debug(HelperLog.methodExit());
+	}
 
 	/*
 	 * Private methods
@@ -186,19 +192,16 @@ public abstract class HelperCompress {
 
 	private static void addEntry(final ZipOutputStream zos, final File file, final int bufferSize) throws IOException {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(zos, file, bufferSize));
-		BufferedInputStream bis = null;
 		final byte[] buffer = new byte[bufferSize];
 
-		try {
-			// create a new zip entry
-			final ZipEntry entry = new ZipEntry(file.getPath() + (file.isDirectory() ? "/" : HelperString.EMPTY_STRING)); //$NON-NLS-1$
-			
-			// place the zip entry in the ZipOutputStream object
-			zos.putNextEntry(entry);
+		// create a new zip entry
+		final ZipEntry entry = new ZipEntry(file.getPath() + (file.isDirectory() ? "/" : HelperString.EMPTY_STRING)); //$NON-NLS-1$
+		
+		// place the zip entry in the ZipOutputStream object
+		zos.putNextEntry(entry);
 
-			if(!file.isDirectory()) {
-				bis = new BufferedInputStream(new FileInputStream(file));
-
+		if(!file.isDirectory()) {
+			try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file))) {
 				int offset;
 	
 				// now write the content of the file to the ZipOutputStream
@@ -206,45 +209,33 @@ public abstract class HelperCompress {
 					zos.write(buffer, 0, offset);
 				}
 			}
-		} finally {
-			if (null != bis) {
-				bis.close();
-			}
 		}
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
-	private static void extractEntry(final ZipFile zipFile, final ZipEntry entry, final File destDir, final int bufferSize) throws IOException {
-		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(zipFile, entry, destDir, bufferSize));
+	private static void extractEntry(final ZipFile zipFile, final ZipEntry entry, final File destDir,
+			final int bufferSize) throws IOException {
+		if (log.isTraceEnabled())
+			log.trace(HelperLog.methodStart(zipFile, entry, destDir, bufferSize));
 		final File file = new File(destDir, entry.getName());
-		
+
 		if (entry.isDirectory()) {
 			file.mkdirs();
 		} else {
 			new File(file.getParent()).mkdirs();
 
-			BufferedInputStream bis = null;
-			BufferedOutputStream bos = null;
-
 			final byte[] buffer = new byte[bufferSize];
 
-			try {
-				bis = new BufferedInputStream(zipFile.getInputStream(entry));
-				bos = new BufferedOutputStream(new FileOutputStream(file));
+			try (BufferedInputStream bis = new BufferedInputStream(zipFile.getInputStream(entry));
+				BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file))) {
 
 				int offset;
 				while (-1 != (offset = bis.read(buffer))) {
 					bos.write(buffer, 0, offset);
 				}
-			} finally {
-				if (null != bos) {
-					bos.close();
-				}
-				if (null != bis) {
-					bis.close();
-				}
 			}
 		}
-		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled())
+			log.trace(HelperLog.methodExit());
 	}
 }

@@ -28,8 +28,6 @@ package net.laubenberger.wichtel.helper;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-import net.laubenberger.wichtel.misc.exception.RuntimeExceptionIsNull;
 
 import org.junit.Test;
 
@@ -38,13 +36,13 @@ import org.junit.Test;
  * JUnit test for {@link HelperLog}
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  */
 public class HelperLogTest {
 	@Test
 	public void testApplicationStart() {
 //		System.err.println(HelperLog.applicationStart().length());
-		assertTrue(6000 < HelperLog.applicationStart("Test", "1.0").length());
+		assertTrue(6000 < HelperLog.applicationStart("Test", "1.0").length()); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Test

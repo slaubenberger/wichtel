@@ -48,13 +48,13 @@ import org.junit.Test;
  * JUnit test for {@link HelperCompress}
  * 
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  */
 public class HelperCompressTest {
 
 	private File fileZip;
 	
-	private final List<File> files = new ArrayList<File>();
+	private final List<File> files = new ArrayList<>();
 	private File fileZipExtractDir;
 
 	{

@@ -54,7 +54,7 @@ import org.slf4j.LoggerFactory;
  * Helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperNet {
@@ -366,7 +366,7 @@ public abstract class HelperNet {
 	public static List<String> getLocalIps() throws UnknownHostException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		final List<String> result = new ArrayList<String>();
+		final List<String> result = new ArrayList<>();
 		final String localHost = InetAddress.getLocalHost().getHostName();
 
 		for (final InetAddress address : InetAddress.getAllByName(localHost)) {

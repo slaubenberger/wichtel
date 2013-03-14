@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  * Helper class for arrays.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperArray { //TODO implement all methods for all primitive types
@@ -127,7 +127,7 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 			throw new RuntimeExceptionIsEmpty("arrays"); //$NON-NLS-1$
 		}
 
-		final List<T> resultList = new ArrayList<T>();
+		final List<T> resultList = new ArrayList<>();
 
 		for (final T[] array : arrays) {
 			if (null == array) {

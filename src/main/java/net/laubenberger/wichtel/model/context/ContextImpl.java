@@ -44,7 +44,7 @@ import net.laubenberger.wichtel.model.ModelAbstract;
  * Implementation of the context for applications.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public class ContextImpl extends ModelAbstract implements Context {
@@ -113,7 +113,7 @@ public class ContextImpl extends ModelAbstract implements Context {
 		}
 
 		if (null == contextData) {
-			contextData = new ConcurrentHashMap<Object, Object>();
+			contextData = new ConcurrentHashMap<>();
 		}
 		contextData.put(key, value);
 		setChanged();

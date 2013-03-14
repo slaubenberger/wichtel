@@ -75,7 +75,7 @@ public interface Model extends ExtendedObject, Serializable, HolderObserver {
 	/**
 	 * Sets the UUID of the model.
 	 *
-	 * @param UUID for the model
+	 * @param uuid  UUID for the model
 	 * @since 0.0.1
 	 */
 	void setUUID(UUID uuid);

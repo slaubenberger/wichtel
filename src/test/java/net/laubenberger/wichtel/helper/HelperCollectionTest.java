@@ -45,12 +45,12 @@ import org.junit.Test;
  * JUnit test for {@link HelperCollection}
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  */
 public class HelperCollectionTest {
 	@Test
 	public void testIsValid() {
-		final Collection<String> list = new ArrayList<String>();
+		final Collection<String> list = new ArrayList<>();
 
 		assertFalse(HelperCollection.isValid(list));
 		list.add("Hi"); //$NON-NLS-1$
@@ -122,7 +122,7 @@ public class HelperCollectionTest {
 	
 	@Test
 	public void testRemoveDuplicates() {
-		Collection<String> list = new ArrayList<String>();
+		Collection<String> list = new ArrayList<>();
 
 		assertEquals(0, HelperCollection.removeDuplicates(list).size());
 

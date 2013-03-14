@@ -39,7 +39,7 @@ import net.laubenberger.wichtel.model.crypto.HashCodeAlgo;
  * Map adapter for the key {@link HashCodeAlgo} and value {@link String}.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCodeAlgo, String>> {
@@ -64,7 +64,7 @@ public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCodeAlgo, Str
 	@Override
 	public Map<HashCodeAlgo, String> unmarshal(final XmlMap xmlMap) throws Exception {
 		if (null != xmlMap) {
-			final Map<HashCodeAlgo, String> map = new HashMap<HashCodeAlgo, String>(xmlMap.getEntries().size());
+			final Map<HashCodeAlgo, String> map = new HashMap<>(xmlMap.getEntries().size());
 			for (final XmlEntry entry : xmlMap.getEntries()) {
 				map.put(HashCodeAlgo.valueOf(entry.getKey()), entry.getValue());
 			}

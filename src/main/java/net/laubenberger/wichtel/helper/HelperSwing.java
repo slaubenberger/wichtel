@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * Helper class for Swing.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperSwing {
@@ -72,7 +72,7 @@ public abstract class HelperSwing {
 				final LookAndFeel laf = UIManager.getLookAndFeel();
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-				final Map<Object, Object> map = new HashMap<Object, Object>(6);
+				final Map<Object, Object> map = new HashMap<>(6);
 
 				map.put("MenuBarUI", UIManager.get("MenuBarUI")); //$NON-NLS-1$ //$NON-NLS-2$
 				map.put("MenuUI", UIManager.get("MenuUI"));  //$NON-NLS-1$//$NON-NLS-2$

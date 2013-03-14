@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * Helper class for various math problems.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
@@ -137,7 +137,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 			result = false;
 		} else {
 			// check odd divisors from 3 to the square root of n
-			for (long ii = 3L, end = (long) StrictMath.sqrt((double) n); ii <= end && result; ii += 2L) {
+			for (long ii = 3L, end = (long) StrictMath.sqrt(n); ii <= end && result; ii += 2L) {
 				if (0L == n % ii) {
 					result = false;
 				}
@@ -195,7 +195,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 			throw new RuntimeExceptionMustBeSmaller("range (end - start + 1)", end - start + 1, Integer.MAX_VALUE); //$NON-NLS-1$
 		}
 
-		final List<Long> result = new ArrayList<Long>((int) (end - start + 1));
+		final List<Long> result = new ArrayList<>((int) (end - start + 1));
 
 		for (long ii = start; ii <= end; ii++) {
 			if (isPrime(ii)) {
@@ -265,7 +265,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 			powerOfTen *= 10.0D;
 		}
 
-		final double result = (double) StrictMath.round(value * powerOfTen) / powerOfTen;
+		final double result = StrictMath.round(value * powerOfTen) / powerOfTen;
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -281,7 +281,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	public static int getRandom(final int n) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 
-		final int result = (int) (StrictMath.random() * (double) n);
+		final int result = (int) (StrictMath.random() * n);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -304,7 +304,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 			throw new RuntimeExceptionMustBeGreater("days", days, 0); //$NON-NLS-1$
 		}
 
-		final double result = amount * StrictMath.pow(StrictMath.E, (double) days / 360.0D * interest);
+		final double result = amount * StrictMath.pow(StrictMath.E, days / 360.0D * interest);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

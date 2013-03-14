@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * Helper class for collections.
  * 
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperCollection {
@@ -109,7 +109,7 @@ public abstract class HelperCollection {
 			throw new RuntimeExceptionIsNull("elements"); //$NON-NLS-1$
 		}
 
-		final List<E> result = new ArrayList<E>(Arrays.asList(elements));
+		final List<E> result = new ArrayList<>(Arrays.asList(elements));
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -130,7 +130,7 @@ public abstract class HelperCollection {
 			throw new RuntimeExceptionIsNull("elements"); //$NON-NLS-1$
 		}
 
-		final Set<E> result = new HashSet<E>(elements.length);
+		final Set<E> result = new HashSet<>(elements.length);
 
 		result.addAll(Arrays.asList(elements));
 
@@ -153,7 +153,7 @@ public abstract class HelperCollection {
 			throw new RuntimeExceptionIsNull("collection"); //$NON-NLS-1$
 		}
 
-		final Collection<E> result = new HashSet<E>(collection);
+		final Collection<E> result = new HashSet<>(collection);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

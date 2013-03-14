@@ -58,7 +58,7 @@ import com.lowagie.text.pdf.PdfReader;
  * JUnit test for {@link HelperPdf}
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  */
 public class HelperPdfTest {
 	private static final byte[] USER = "admin".getBytes(); //$NON-NLS-1$
@@ -66,8 +66,8 @@ public class HelperPdfTest {
 	
 	@Test
 	public void testWritePdfFromImages() {
-		final List<File> files = new ArrayList<File>(ResourceImage.values().length);
-		final List<Image> images = new ArrayList<Image>(ResourceImage.values().length);
+		final List<File> files = new ArrayList<>(ResourceImage.values().length);
+		final List<Image> images = new ArrayList<>(ResourceImage.values().length);
 		
 		for (final Resource res : ResourceImage.values()) {
 			files.add(res.getResourceAsFile());
@@ -83,10 +83,12 @@ public class HelperPdfTest {
 			pdf = HelperIO.getTemporaryFile("pdf"); //$NON-NLS-1$
 			
 			HelperPdf.writePdfFromImages(PageSize.A4, true, pdf, HelperCollection.toArray(files));
-			assertTrue(9000 < pdf.length());
+//			System.err.println("IMG1: " + pdf.length());
+			assertTrue(6500 < pdf.length());
 
 			HelperPdf.writePdfFromImages(PageSize.A4, true, pdf, HelperCollection.toArray(images));
-			assertTrue(9000 < pdf.length());
+//			System.err.println("IMG2: " + pdf.length());
+			assertTrue(7500 < pdf.length());
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
@@ -172,7 +174,7 @@ public class HelperPdfTest {
 			pdf = HelperIO.getTemporaryFile("pdf"); //$NON-NLS-1$
 			
 			HelperPdf.writePdfFromPpt(PageSize.A4, true, pdf, ResourceOffice.PPT.getResourceAsFile());
-			assertTrue(4000 < pdf.length());
+			assertTrue(6000 < pdf.length());
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
@@ -234,7 +236,7 @@ public class HelperPdfTest {
 
 	@Test
 	public void testSetAndGetMetaData() {
-		final Map<String, String> metadata = new HashMap<String, String>();
+		final Map<String, String> metadata = new HashMap<>();
 		metadata.put("myInfo", "This is my additional info"); //$NON-NLS-1$ //$NON-NLS-2$
 		metadata.put("myMetaData", "This is my additional metadata"); //$NON-NLS-1$ //$NON-NLS-2$
 		

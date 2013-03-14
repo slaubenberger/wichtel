@@ -42,12 +42,12 @@ import org.junit.Test;
  * JUnit test for {@link HelperMap}
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  */
 public class HelperMapTest {
 	@Test
 	public void testIsValid() {
-		final Map<String, String> map = new HashMap<String, String>();
+		final Map<String, String> map = new HashMap<>();
 
 		assertFalse(HelperMap.isValid(map));
 		map.put("Hi", "Stefan"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -58,7 +58,7 @@ public class HelperMapTest {
 
 	@Test
 	public void testGetKeys() {
-		final Map<String, String> map = new HashMap<String, String>();
+		final Map<String, String> map = new HashMap<>();
 
 		assertEquals(0, HelperMap.getKeys(map).size());
 		
@@ -80,7 +80,7 @@ public class HelperMapTest {
 
 	@Test
 	public void testGetValues() {
-		final Map<String, String> map = new HashMap<String, String>();
+		final Map<String, String> map = new HashMap<>();
 
 		assertEquals(0, HelperMap.getValues(map).size());
 		
@@ -102,7 +102,7 @@ public class HelperMapTest {
 	
 	@Test
 	public void testDump() {
-		final Map<String, String> map = new HashMap<String, String>();
+		final Map<String, String> map = new HashMap<>();
 
 		map.put("1", "Silvan"); //$NON-NLS-1$ //$NON-NLS-2$
 		map.put("2", "Roman"); //$NON-NLS-1$ //$NON-NLS-2$

@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
  * Helper for various environment informations (e.g. OS, VM)
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperEnvironment {
@@ -505,7 +505,7 @@ public abstract class HelperEnvironment {
 	public static Map<String, Object> getReportJava() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
-		final Map<String, Object> result = new HashMap<String, Object>();
+		final Map<String, Object> result = new HashMap<>();
 		
 		result.put("version", getJavaVersion()); //$NON-NLS-1$
 		result.put("vendor", getJavaVendor()); //$NON-NLS-1$
@@ -528,7 +528,7 @@ public abstract class HelperEnvironment {
 	public static Map<String, Object> getReportOS() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
-		final Map<String, Object> result = new HashMap<String, Object>();
+		final Map<String, Object> result = new HashMap<>();
 		
 		result.put("platform", getPlatform()); //$NON-NLS-1$
 		result.put("name", getOsName()); //$NON-NLS-1$
@@ -550,7 +550,7 @@ public abstract class HelperEnvironment {
 	public static Map<String, Object> getReportUser() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
-		final Map<String, Object> result = new HashMap<String, Object>();
+		final Map<String, Object> result = new HashMap<>();
 		
 		result.put("name", getUserName()); //$NON-NLS-1$
 		result.put("home directory", getUserHomeDirectory()); //$NON-NLS-1$
@@ -572,7 +572,7 @@ public abstract class HelperEnvironment {
 	public static Map<String, Object> getReportSystem() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
-		final Map<String, Object> result = new HashMap<String, Object>();
+		final Map<String, Object> result = new HashMap<>();
 		
 		result.put("processors/cores", getAvailableProcessors()); //$NON-NLS-1$
 		if (null != HelperScreen.getCurrentScreenSize()) result.put("current screen size", HelperScreen.getCurrentScreenSize()); //$NON-NLS-1$

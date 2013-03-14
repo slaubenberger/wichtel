@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * Helper class for maps.
  * 
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperMap {
@@ -80,7 +80,7 @@ public abstract class HelperMap {
 			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
 		}
 
-		final List<K> result = new ArrayList<K>(map.size());
+		final List<K> result = new ArrayList<>(map.size());
 
 		for (final Entry<K, V> pair : map.entrySet()) {
 			result.add(pair.getKey());
@@ -104,7 +104,7 @@ public abstract class HelperMap {
 			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
 		}
 
-		final List<V> result = new ArrayList<V>(map.size());
+		final List<V> result = new ArrayList<>(map.size());
 
 		for (final Entry<K, V> pair : map.entrySet()) {
 			result.add(pair.getValue());

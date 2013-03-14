@@ -46,7 +46,7 @@ import net.laubenberger.wichtel.service.ServiceAbstract;
 public class ProfilerImpl<T> extends ServiceAbstract implements Profiler<T> {
 	private static final Logger log = LoggerFactory.getLogger(ProfilerImpl.class);
 
-	private final Map<T, Long> profiles = new ConcurrentHashMap<T, Long>();
+	private final Map<T, Long> profiles = new ConcurrentHashMap<>();
 	private long meanTime;
 	private long elapsedTime;
 

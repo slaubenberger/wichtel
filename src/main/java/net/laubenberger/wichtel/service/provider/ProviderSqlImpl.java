@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * This class provides functions to connect and execute statements on SQL-Server.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
@@ -213,24 +213,12 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 			throw new RuntimeExceptionIsEmpty("statement"); //$NON-NLS-1$
 		}
 
-		Statement stmt = null;
-		Connection con = null;
-
-		try {
-			con = getConnection();
-			stmt = con.createStatement();
-
+		try (Connection con = getConnection();
+			Statement stmt = con.createStatement()) {
 			final int result = stmt.executeUpdate(statement);
 
 			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
-		} finally {
-			if (null != con) {
-				con.close();
-			}
-			if (null != stmt) {
-				stmt.close();
-			}
 		}
 	}
 
@@ -244,24 +232,12 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 			throw new RuntimeExceptionIsEmpty("statement"); //$NON-NLS-1$
 		}
 
-		Statement stmt = null;
-		Connection con = null;
-
-		try {
-			con = getConnection();
-			stmt = con.createStatement();
-
+		try (Connection con = getConnection();
+				Statement stmt = con.createStatement()) {
 			final boolean result = stmt.execute(statement);
 
 			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
-		} finally {
-			if (null != con) {
-				con.close();
-			}
-			if (null != stmt) {
-				stmt.close();
-			}
 		}
 	}
 }

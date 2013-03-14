@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * Encodes and decodes data to Base64 format.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class EncoderBase64 {
@@ -226,9 +226,9 @@ public abstract class EncoderBase64 {
 			ip++;
 			final int i1 = input[ip];
 			ip++;
-			final int i2 = (int) (ip < iLen ? input[ip] : 'A');
+			final int i2 = ip < iLen ? input[ip] : 'A';
 			ip++;
-			final int i3 = (int) (ip < iLen ? input[ip] : 'A');
+			final int i3 = ip < iLen ? input[ip] : 'A';
 			ip++;
 
 			if (Byte.MAX_VALUE < i0 || Byte.MAX_VALUE < i1 || Byte.MAX_VALUE < i2 || Byte.MAX_VALUE < i3) {

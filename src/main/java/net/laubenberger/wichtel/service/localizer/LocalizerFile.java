@@ -318,7 +318,7 @@ public class LocalizerFile extends LocalizerAbstract {
 	public List<Language> getAvailableLanguages() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
-		final List<Language> result = new ArrayList<Language>();
+		final List<Language> result = new ArrayList<>();
 		
 		for (final Language language : Language.values()) {
 			final ResourceBundle bundle = ResourceBundle.getBundle(localizerBase, language.getLocale());

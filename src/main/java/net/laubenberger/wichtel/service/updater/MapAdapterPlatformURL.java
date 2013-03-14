@@ -40,7 +40,7 @@ import net.laubenberger.wichtel.model.misc.Platform;
  * Map adapter for the key {@link Platform} and value {@link URL}.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public class MapAdapterPlatformURL extends XmlAdapter<XmlMap, Map<Platform, URL>> {
@@ -65,7 +65,7 @@ public class MapAdapterPlatformURL extends XmlAdapter<XmlMap, Map<Platform, URL>
 	@Override
 	public Map<Platform, URL> unmarshal(final XmlMap xmlMap) throws Exception {
 		if (null != xmlMap) {
-			final Map<Platform, URL> map = new HashMap<Platform, URL>(xmlMap.getEntries().size());
+			final Map<Platform, URL> map = new HashMap<>(xmlMap.getEntries().size());
 			for (final XmlEntry entry : xmlMap.getEntries()) {
 				map.put(Platform.valueOf(entry.getKey()), new URL(entry.getValue()));
 			}

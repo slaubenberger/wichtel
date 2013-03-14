@@ -57,14 +57,14 @@ import org.slf4j.LoggerFactory;
  * This is an implementation for hash code generation.
  *
  * @author Stefan Laubenberger
- * @version 0.0.2, 2013-03-13
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
 	private static final Logger log = LoggerFactory.getLogger(HashCodeGeneratorImpl.class);
 
 	private static final int DEFAULT_PARTS = 32;
-	private static final int DEFAULT_PARTSIZE = Constants.DEFAULT_FILE_BUFFER_SIZE;
+	private static final int DEFAULT_PARTSIZE = 65536;
 
 	private final MessageDigest md;
 
@@ -127,19 +127,11 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 
-		BufferedInputStream bis = null;
-
-		try {
-			bis = new BufferedInputStream(new FileInputStream(input));
-
+		try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(input))) {
 			final byte[] result = getHash(bis, bufferSize);
 
 			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
-		} finally {
-			if (null != bis) {
-				bis.close();
-			}
 		}
 	}
 
@@ -252,21 +244,13 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 		byte[] temp = Long.toString(input.length()).getBytes();
 		final int offset = (int) (input.length() / parts - partSize);
 
-		RandomAccessFile raf = null;
-
-		try {
-			raf = new RandomAccessFile(input, "r");  //$NON-NLS-1$
-
+		try (RandomAccessFile raf = new RandomAccessFile(input, "r")) { //$NON-NLS-1$
 			for (int ii = 0; ii < parts; ii++) {
 				raf.read(buffer);
 
 				temp = HelperArray.concatenate(temp, buffer);
 
 				raf.seek(offset);
-			}
-		} finally {
-			if (null != raf) {
-				raf.close();
 			}
 		}
 		final byte[] result = getHash(temp);

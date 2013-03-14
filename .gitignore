@@ -5,6 +5,7 @@ target
 /.idea_modules
 /.classpath
 /.project
+/doc/javadoc
 
 # Linux specific
 *swp

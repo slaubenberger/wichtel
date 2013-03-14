@@ -51,20 +51,20 @@ import org.junit.Test;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  */
 public class UpdaterTest {
 	@Before
 	public void setUp() throws Exception {
 		final ModelUpdater doc = new ModelUpdaterImpl();
 
-		final Map<Platform, URL> locations = new HashMap<Platform, URL>(3);
+		final Map<Platform, URL> locations = new HashMap<>(3);
 		locations.put(Platform.WINDOWS, new URL("http://www.ms.com")); //$NON-NLS-1$
 		locations.put(Platform.MAC_OSX, new URL("http://www.apple.com")); //$NON-NLS-1$
 		locations.put(Platform.UNIX, new URL("http://www.unix.com")); //$NON-NLS-1$
 		doc.setLocations(locations);
 
-		final Map<HashCodeAlgo, String> hashs = new HashMap<HashCodeAlgo, String>(3);
+		final Map<HashCodeAlgo, String> hashs = new HashMap<>(3);
 		hashs.put(HashCodeAlgo.MD5, "MD5-Hashvalue"); //$NON-NLS-1$
 		hashs.put(HashCodeAlgo.SHA256, "SHA256-Hashvalue"); //$NON-NLS-1$
 		doc.setHashs(hashs);

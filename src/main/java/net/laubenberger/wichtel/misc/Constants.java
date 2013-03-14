@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
  * Collected constants of very general utility.
  *
  * @author Stefan Laubenberger
- * @version 0.0.2, 2013-03-13
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class Constants {
@@ -177,9 +177,9 @@ public abstract class Constants {
 			WICHTEL.setVersion("0.0.2"); //$NON-NLS-1$
 			WICHTEL.setBuild(1);
 			WICHTEL.setCreated(HelperTime.getDate(2013, 3, 5, 22, 50, 0));
-			WICHTEL.setChanged(HelperTime.getDate(2013, 3, 13, 18, 40, 0));
+			WICHTEL.setChanged(HelperTime.getDate(2013, 3, 14, 23, 30, 0));
 			WICHTEL.setLanguage(Language.ENGLISH);
-			WICHTEL.setUUID(UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5")); //$NON-NLS-1$
+			WICHTEL.setUUID(UUID.fromString("6e9ed2f6-2ef0-4786-8584-01727e5bc553")); //$NON-NLS-1$
 			WICHTEL.setUrl(new URL("http://www.laubenberger.net/")); //$NON-NLS-1$
 		} catch (MalformedURLException ex) {
 			// should never happen!

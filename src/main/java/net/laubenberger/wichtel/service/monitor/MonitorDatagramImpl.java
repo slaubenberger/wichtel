@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
  * Monitor implementation to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public class MonitorDatagramImpl extends ServiceAbstract implements MonitorDatagram {
@@ -58,7 +58,7 @@ public class MonitorDatagramImpl extends ServiceAbstract implements MonitorDatag
 
 	private Thread thread;
 
-	private final Collection<ListenerDatagram> listeners = new HashSet<ListenerDatagram>();
+	private final Collection<ListenerDatagram> listeners = new HashSet<>();
 
 	private int port;
 	private DatagramSocket socket;

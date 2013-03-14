@@ -39,7 +39,7 @@ import net.laubenberger.wichtel.misc.exception.RuntimeExceptionIsNull;
  * Encodes and decodes data to Hex format.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class EncoderHex {
@@ -64,7 +64,7 @@ public abstract class EncoderHex {
 		final StringBuilder hexString = new StringBuilder(input.length * 2);
 
 		for (final byte digest : input) {
-			final String hex = Integer.toHexString(0xFF & (int) digest);
+			final String hex = Integer.toHexString(0xFF & digest);
 			if (1 == hex.length()) {
 				hexString.append('0');
 			}

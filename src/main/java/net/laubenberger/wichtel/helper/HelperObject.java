@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
  * Helper class for objects.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperObject {
@@ -135,11 +135,8 @@ public abstract class HelperObject {
 			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
 		}
 
-		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ObjectOutputStream oos = null;
-
-		try {
-			oos = new ObjectOutputStream(baos);
+		try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ObjectOutputStream oos = new ObjectOutputStream(baos)){
 			oos.writeObject(object);
 			oos.flush();
 
@@ -147,11 +144,6 @@ public abstract class HelperObject {
 
 			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
-		} finally {
-			if (null != oos) {
-				oos.close();
-			}
-//                bos.close();
 		}
 	}
 
@@ -173,18 +165,11 @@ public abstract class HelperObject {
 			throw new RuntimeExceptionIsEmpty("data"); //$NON-NLS-1$
 		}
 
-		ObjectInputStream ois = null;
-
-		try {
-			ois = new ObjectInputStream(new ByteArrayInputStream(data));
+		try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data))) {
 			final Object result = ois.readObject();
 
 			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
-		} finally {
-			if (null != ois) {
-				ois.close();
-			}
 		}
 	}
 
@@ -226,29 +211,19 @@ public abstract class HelperObject {
             throw new RuntimeExceptionIsNull("original"); //$NON-NLS-1$
         }
 
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CloneOutput co = null;
-        ObjectInputStream ois = null;
-
-        try {
-            co = new CloneOutput(baos);
+        T result = null;
+        
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      		  CloneOutput co = new CloneOutput(baos)) {
             co.writeObject(original);
 
-            final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            ois = new CloneInput(bais, co);
-
-            final T result = (T) ois.readObject();
-
-            if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-            return result;
-        } finally {
-            if (null != co) {
-                co.close();
-            }
-            if (null != ois) {
-                ois.close();
+            try (ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            		ObjectInputStream ois = new CloneInput(bais, co)) {
+            	result = (T) ois.readObject();
             }
         }
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+        return result;
     }
     
 	/**
@@ -386,7 +361,7 @@ public abstract class HelperObject {
 	 */
 
 	private static class CloneOutput extends ObjectOutputStream {
-		final Queue<Class<?>> classQueue = new LinkedList<Class<?>>();
+		final Queue<Class<?>> classQueue = new LinkedList<>();
 
 		CloneOutput(final OutputStream os) throws IOException {
 			super(os);

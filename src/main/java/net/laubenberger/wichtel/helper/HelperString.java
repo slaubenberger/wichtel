@@ -26,7 +26,6 @@
 
 package net.laubenberger.wichtel.helper;
 
-import java.math.BigDecimal;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,13 +42,13 @@ import org.slf4j.LoggerFactory;
  * Helper class for strings.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperString {
 	private static final Logger log = LoggerFactory.getLogger(HelperString.class);
 
-	public static final String NEW_LINE = System.getProperty("line.separator"); //$NON-NLS-1$
+	public static final String NEW_LINE = System.lineSeparator();
 
 	public static final String EMPTY_STRING = ""; //$NON-NLS-1$
 	public static final String TAB = "\t"; //$NON-NLS-1$
@@ -108,17 +107,8 @@ public abstract class HelperString {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 
-		boolean result = false;
-
-		//TODO a bit lazy implemented... improve with regex if possible
-		try {
-			new BigDecimal(input);
-			result = true;
-		} catch (NumberFormatException ex) {
-			//do nothing
-//			if (log.isInfoEnabled()) log.info("NumberFormat invalid", ex); //$NON-NLS-1$
-		}
-
+		boolean result =  input.matches("-?\\d+(\\.\\d+)?"); //$NON-NLS-1$
+		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}

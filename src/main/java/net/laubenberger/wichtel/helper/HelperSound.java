@@ -37,11 +37,11 @@ import java.util.TimerTask;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
-import javax.sound.midi.Receiver;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 import javax.sound.midi.Synthesizer;
 import javax.sound.midi.Transmitter;
+import javax.sound.sampled.AudioFileFormat.Type;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -49,7 +49,6 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.Line.Info;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.sound.sampled.AudioFileFormat.Type;
 
 import net.laubenberger.wichtel.misc.exception.RuntimeExceptionIsNull;
 
@@ -61,7 +60,7 @@ import org.slf4j.LoggerFactory;
  * THelper class for sound operations.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperSound {
@@ -182,15 +181,17 @@ public abstract class HelperSound {
 		result.open(); // Turn it on.
 
 		// Get a Synthesizer for the Sequencer to send notes to
-		final Synthesizer synth = MidiSystem.getSynthesizer();
-		synth.open();  // acquire whatever resources it needs
-
-		// The Sequencer obtained above may be connected to a Synthesizer
-		// by default, or it may not.  Therefore, we explicitly connect it.
-		final Transmitter transmitter = result.getTransmitter();
-		final Receiver receiver = synth.getReceiver();
-		transmitter.setReceiver(receiver);
-
+//		try (Synthesizer synth = MidiSystem.getSynthesizer()) {
+			final Synthesizer synth = MidiSystem.getSynthesizer();
+			synth.open();  // acquire whatever resources it needs
+	
+			// The Sequencer obtained above may be connected to a Synthesizer
+			// by default, or it may not.  Therefore, we explicitly connect it.
+//			try (Transmitter transmitter = result.getTransmitter()) {
+				final Transmitter transmitter = result.getTransmitter();
+				transmitter.setReceiver(synth.getReceiver());
+//			}
+//		}
 		// Read the sequence from the file and tell the sequencer about it
 		result.setSequence(sequence);
 
@@ -237,15 +238,17 @@ public abstract class HelperSound {
 			throw new RuntimeExceptionIsNull("sequence"); //$NON-NLS-1$
 		}
 
-		final Sequencer sequencer = getSequencer(sequence);
-		sequencer.start();
-		final Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				sequencer.stop();
-			}
-		}, sequence.getTickLength());
+		try (Sequencer sequencer = getSequencer(sequence)) {
+			sequencer.start();
+			final Timer timer = new Timer();
+			timer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					sequencer.stop();
+				}
+			}, sequence.getTickLength());
+		}
+		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 

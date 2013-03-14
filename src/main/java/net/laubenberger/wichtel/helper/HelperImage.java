@@ -59,7 +59,7 @@ import org.slf4j.LoggerFactory;
  * Helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public abstract class HelperImage {
@@ -628,7 +628,7 @@ public abstract class HelperImage {
 	 */
 	private static Collection<String> unique(final String... strings) {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(strings));
-		final Collection<String> result = new HashSet<String>(strings.length);
+		final Collection<String> result = new HashSet<>(strings.length);
 
 		for (final String str : strings) {
 			result.add(str.toLowerCase(Locale.getDefault()));

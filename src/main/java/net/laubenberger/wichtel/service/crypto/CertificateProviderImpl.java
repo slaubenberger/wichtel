@@ -74,7 +74,7 @@ import org.slf4j.LoggerFactory;
  * This class generates, reads and writes X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public class CertificateProviderImpl extends ServiceAbstract implements CertificateProvider {
@@ -109,21 +109,14 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-
-		BufferedInputStream bis = null;
-
-		try {
-			bis = new BufferedInputStream(new FileInputStream(file));
-
-			final X509Certificate result = readCertificate(new BufferedInputStream(new FileInputStream(file)));
-
-			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-			return result;
-		} finally {
-			if (null != bis) {
-				bis.close();
-			}
+		
+		X509Certificate result = null;
+		
+		try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file))) {
+			result = readCertificate(bis);
 		}
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
@@ -133,18 +126,20 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
 
+		X509Certificate result = null;
+		
 		try {
 			// Generate the certificate factory
 			final CertificateFactory cf = CertificateFactory.getInstance("X.509", provider); //$NON-NLS-1$
 
 			// get the certificate
-			final X509Certificate result = (X509Certificate) cf.generateCertificate(is);
+			result = (X509Certificate) cf.generateCertificate(is);
 
-			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-			return result;
 		} finally {
 			is.close();
 		}
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override

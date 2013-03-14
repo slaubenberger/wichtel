@@ -39,7 +39,7 @@ import net.laubenberger.wichtel.misc.xml.XmlMap;
  * Map adapter for the key {@link String} and value {@link Map} (multi map).
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.0.2, 2013-03-14
  * @since 0.0.1
  */
 public class MapAdapterMap extends XmlAdapter<XmlMap, Map<String, Map<String, String>>> {
@@ -67,13 +67,13 @@ public class MapAdapterMap extends XmlAdapter<XmlMap, Map<String, Map<String, St
 	@Override
 	public Map<String, Map<String, String>> unmarshal(final XmlMap xmlMap) throws Exception {
 		if (null != xmlMap) {
-			final Map<String, Map<String, String>> map = new HashMap<String, Map<String, String>>();
+			final Map<String, Map<String, String>> map = new HashMap<>();
 			
 			for (final XmlEntry entry : xmlMap.getEntries()) {
 				Map<String, String> items = map.get(entry.getId());
 				
 				if (null == items) {
-					items = new HashMap<String, String>();
+					items = new HashMap<>();
 				}
 				items.put(entry.getKey(), entry.getValue());
 				map.put(entry.getId(), items);
