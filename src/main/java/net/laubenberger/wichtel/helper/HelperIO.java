@@ -2,26 +2,30 @@
  * Copyright (c) 2007-2013 by Stefan Laubenberger.
  *
  * "wichtel" is free software: you can redistribute it and/or modify
- * it under the terms of the General Public License v2.0.
+ * it under the terms of the GNU Lesser General Public License v3.0.
  *
  * "wichtel" is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * See the GNU General Public License for more details:
- * <http://www.gnu.org/licenses>
+ * See the GNU Lesser General Public License for more details:
+ * -----------------------------------------------------------
+ * http://www.gnu.org/licenses
+ *
  *
  * This distribution is available at:
- * <https://github.com/slaubenberger/wichtel/>
+ * ----------------------------------
+ * https://github.com/slaubenberger/wichtel/
+ *
  *
  * Contact information:
+ * --------------------
  * Stefan Laubenberger
  * Bullingerstrasse 53
  * CH-8004 Zuerich
  *
- * <http://www.laubenberger.net>
- *
- * <laubenberger@gmail.com>
+ * http://www.laubenberger.net
+ * laubenberger@gmail.com
  */
 
 package net.laubenberger.wichtel.helper;
@@ -67,7 +71,7 @@ import org.slf4j.LoggerFactory;
  * Helper class for disk I/O.
  * 
  * @author Stefan Laubenberger
- * @version 0.0.2, 2013-03-14
+ * @version 0.1.0, 2013-07-31
  * @since 0.0.1
  */
 public abstract class HelperIO {
@@ -225,7 +229,7 @@ public abstract class HelperIO {
 	 * @since 0.0.1
 	 */
 	public static void delete(final File... files) throws IOException {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(files));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(new Object[]{files}));
 		if (null == files) {
 			throw new RuntimeExceptionIsNull("files"); //$NON-NLS-1$
 		}
@@ -1263,7 +1267,7 @@ public abstract class HelperIO {
 			}
 		};
 
-		final int result = HelperIO.getFiles(path, filter).size();
+		final int result = getFiles(path, filter).size();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -1291,7 +1295,7 @@ public abstract class HelperIO {
 			}
 		};
 
-		final int result = HelperIO.getFiles(path, filter).size();
+		final int result = getFiles(path, filter).size();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -1321,7 +1325,7 @@ public abstract class HelperIO {
 		long result = 0L;
 		
 //		List<File> list = HelperIO.getFiles(new File(path), filter);
-		final List<File> list = HelperIO.getFiles(path);
+		final List<File> list = getFiles(path);
 		
 		for (final File tempFile : list) {
 			result += tempFile.length();

@@ -2,26 +2,30 @@
  * Copyright (c) 2007-2013 by Stefan Laubenberger.
  *
  * "wichtel" is free software: you can redistribute it and/or modify
- * it under the terms of the General Public License v2.0.
+ * it under the terms of the GNU Lesser General Public License v3.0.
  *
  * "wichtel" is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * See the GNU General Public License for more details:
- * <http://www.gnu.org/licenses>
+ * See the GNU Lesser General Public License for more details:
+ * -----------------------------------------------------------
+ * http://www.gnu.org/licenses
+ *
  *
  * This distribution is available at:
- * <https://github.com/slaubenberger/wichtel/>
+ * ----------------------------------
+ * https://github.com/slaubenberger/wichtel/
+ *
  *
  * Contact information:
+ * --------------------
  * Stefan Laubenberger
  * Bullingerstrasse 53
  * CH-8004 Zuerich
  *
- * <http://www.laubenberger.net>
- *
- * <laubenberger@gmail.com>
+ * http://www.laubenberger.net
+ * laubenberger@gmail.com
  */
 
 package net.laubenberger.wichtel.misc;
@@ -41,7 +45,7 @@ import net.laubenberger.wichtel.helper.HelperObject;
  * Loads JAR files during runtime.
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.1.0, 2013-07-31
  * @since 0.0.1
  */
 public class JarLoader extends URLClassLoader {
@@ -50,7 +54,7 @@ public class JarLoader extends URLClassLoader {
 	
 	public JarLoader(final URL... urls){
 		super(urls);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(urls));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(new Object[]{urls}));
 	}
 
 	/**
@@ -89,7 +93,7 @@ public class JarLoader extends URLClassLoader {
 	 * @see Class
 	 * @since 0.0.1
 	 */
-	public Object createInstance(final String clazz, final Class<?>[] paramClazzes, final Object[] params) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SecurityException, InvocationTargetException, NoSuchMethodException {
+	public Object createInstance(final String clazz, final Class<?>[] paramClazzes, final Object... params) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SecurityException, InvocationTargetException, NoSuchMethodException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clazz, paramClazzes, params));
 
 		final Object result = HelperObject.createInstance(loadClass(clazz, true), paramClazzes, params);
