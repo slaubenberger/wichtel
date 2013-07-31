@@ -2,26 +2,30 @@
  * Copyright (c) 2007-2013 by Stefan Laubenberger.
  *
  * "wichtel" is free software: you can redistribute it and/or modify
- * it under the terms of the General Public License v2.0.
+ * it under the terms of the GNU Lesser General Public License v3.0.
  *
  * "wichtel" is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * See the GNU General Public License for more details:
- * <http://www.gnu.org/licenses>
+ * See the GNU Lesser General Public License for more details:
+ * -----------------------------------------------------------
+ * http://www.gnu.org/licenses
+ *
  *
  * This distribution is available at:
- * <https://github.com/slaubenberger/wichtel/>
+ * ----------------------------------
+ * https://github.com/slaubenberger/wichtel/
+ *
  *
  * Contact information:
+ * --------------------
  * Stefan Laubenberger
  * Bullingerstrasse 53
  * CH-8004 Zuerich
  *
- * <http://www.laubenberger.net>
- *
- * <laubenberger@gmail.com>
+ * http://www.laubenberger.net
+ * laubenberger@gmail.com
  */
 package net.laubenberger.wichtel.model.misc;
 
@@ -32,6 +36,7 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import net.laubenberger.wichtel.helper.HelperLog;
 import net.laubenberger.wichtel.helper.HelperObject;
@@ -45,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.0.2, 2013-03-14
+ * @version 0.1.0, 2013-07-31
  * @since 0.0.1
  */
 @XmlRootElement(name = "document")
@@ -306,7 +311,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	 * Inner classes
 	 */
 
-	public static class XmlAdapterDocument extends javax.xml.bind.annotation.adapters.XmlAdapter<DocumentImpl, Document> {
+	public static class XmlAdapterDocument extends XmlAdapter<DocumentImpl, Document> {
 
 		@Override
 		public DocumentImpl marshal(final Document model) {

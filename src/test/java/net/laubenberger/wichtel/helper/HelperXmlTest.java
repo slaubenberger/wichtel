@@ -2,26 +2,30 @@
  * Copyright (c) 2007-2013 by Stefan Laubenberger.
  *
  * "wichtel" is free software: you can redistribute it and/or modify
- * it under the terms of the General Public License v2.0.
+ * it under the terms of the GNU Lesser General Public License v3.0.
  *
  * "wichtel" is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * See the GNU General Public License for more details:
- * <http://www.gnu.org/licenses>
+ * See the GNU Lesser General Public License for more details:
+ * -----------------------------------------------------------
+ * http://www.gnu.org/licenses
+ *
  *
  * This distribution is available at:
- * <https://github.com/slaubenberger/wichtel/>
+ * ----------------------------------
+ * https://github.com/slaubenberger/wichtel/
+ *
  *
  * Contact information:
+ * --------------------
  * Stefan Laubenberger
  * Bullingerstrasse 53
  * CH-8004 Zuerich
  *
- * <http://www.laubenberger.net>
- *
- * <laubenberger@gmail.com>
+ * http://www.laubenberger.net
+ * laubenberger@gmail.com
  */
 
 package net.laubenberger.wichtel.helper;
@@ -49,7 +53,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperXml}
  *
  * @author Stefan Laubenberger
- * @version 0.0.1, 2013-03-05
+ * @version 0.1.0, 2013-07-31
  */
 public class HelperXmlTest {
 	private static final String INVALID_XML = new String(new char[]{(char) 127, (char) 144, (char) 145, (char) 154, (char) 155, (char) 157, (char) 524, (char) 525, (char) 9, (char) 10, (char) 11, (char) 13, (char) 40, (char) 41, (char) 111, (char) 112, (char) 123, (char) 124, (char) 55295, (char) 55296, (char) 57343, (char) 57344, (char) 65533, (char) 65534});

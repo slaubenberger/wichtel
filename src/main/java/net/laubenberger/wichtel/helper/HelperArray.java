@@ -2,26 +2,30 @@
  * Copyright (c) 2007-2013 by Stefan Laubenberger.
  *
  * "wichtel" is free software: you can redistribute it and/or modify
- * it under the terms of the General Public License v2.0.
+ * it under the terms of the GNU Lesser General Public License v3.0.
  *
  * "wichtel" is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * See the GNU General Public License for more details:
- * <http://www.gnu.org/licenses>
+ * See the GNU Lesser General Public License for more details:
+ * -----------------------------------------------------------
+ * http://www.gnu.org/licenses
+ *
  *
  * This distribution is available at:
- * <https://github.com/slaubenberger/wichtel/>
+ * ----------------------------------
+ * https://github.com/slaubenberger/wichtel/
+ *
  *
  * Contact information:
+ * --------------------
  * Stefan Laubenberger
  * Bullingerstrasse 53
  * CH-8004 Zuerich
  *
- * <http://www.laubenberger.net>
- *
- * <laubenberger@gmail.com>
+ * http://www.laubenberger.net
+ * laubenberger@gmail.com
  */
 
 package net.laubenberger.wichtel.helper;
@@ -43,7 +47,7 @@ import org.slf4j.LoggerFactory;
  * Helper class for arrays.
  *
  * @author Stefan Laubenberger
- * @version 0.0.2, 2013-03-14
+ * @version 0.1.0, 2013-07-31
  * @since 0.0.1
  */
 public abstract class HelperArray { //TODO implement all methods for all primitive types
@@ -70,7 +74,7 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	 * @return true/false
 	 * @since 0.0.1
 	 */
-	public static boolean isValid(final Object[] arg) { //$JUnit$
+	public static boolean isValid(final Object... arg) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arg));
 
 		final boolean result = !(null == arg || 0 == arg.length);
@@ -86,7 +90,7 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	 * @return true/false
 	 * @since 0.0.1
 	 */
-	public static boolean isValid(final byte[] arg) { //$JUnit$
+	public static boolean isValid(final byte... arg) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arg));
 
 		final boolean result = !(null == arg || 0 == arg.length);
@@ -102,7 +106,7 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	 * @return true/false
 	 * @since 0.0.1
 	 */
-	public static boolean isValid(final char[] arg) { //$JUnit$
+	public static boolean isValid(final char... arg) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arg));
 
 		final boolean result = !(null == arg || 0 == arg.length);
@@ -119,11 +123,11 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	 * @since 0.0.1
 	 */
 	public static <T> T[] concatenate(final T[]... arrays) { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arrays));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(new Object[]{arrays}));
 		if (null == arrays) {
 			throw new RuntimeExceptionIsNull("arrays"); //$NON-NLS-1$
 		}
-		if (!isValid(arrays)) {
+		if (!isValid(new Object[]{arrays})) {
 			throw new RuntimeExceptionIsEmpty("arrays"); //$NON-NLS-1$
 		}
 
@@ -150,11 +154,11 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	 * @since 0.0.1
 	 */
 	public static byte[] concatenate(final byte[]... arrays) { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arrays));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(new Object[]{arrays}));
 		if (null == arrays) {
 			throw new RuntimeExceptionIsNull("arrays"); //$NON-NLS-1$
 		}
-		if (!isValid(arrays)) {
+		if (!isValid(new Object[]{arrays})) {
 			throw new RuntimeExceptionIsEmpty("arrays"); //$NON-NLS-1$
 		}
 
@@ -187,11 +191,11 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	 * @since 0.0.1
 	 */
 	public static char[] concatenate(final char[]... arrays) { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arrays));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(new Object[]{arrays}));
 		if (null == arrays) {
 			throw new RuntimeExceptionIsNull("arrays"); //$NON-NLS-1$
 		}
-		if (!isValid(arrays)) {
+		if (!isValid(new Object[]{arrays})) {
 			throw new RuntimeExceptionIsEmpty("arrays"); //$NON-NLS-1$
 		}
 
@@ -223,7 +227,7 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	 * @return array without duplicates
 	 * @since 0.0.1
 	 */
-	public static <T> T[] removeDuplicates(final T[] array) { //$JUnit$
+	public static <T> T[] removeDuplicates(final T... array) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(array));
 		if (null == array) {
 			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
@@ -262,7 +266,7 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	 * @return dump string
 	 * @since 0.0.1
 	 */
-	public static String dump(final Object[] array) { //$JUnit$
+	public static String dump(final Object... array) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(array));
 		if (null == array) {
 			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
@@ -290,7 +294,7 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	 * @return dump string
 	 * @since 0.0.1
 	 */
-	public static String dump(final byte[] array) { //$JUnit$
+	public static String dump(final byte... array) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(array));
 		if (null == array) {
 			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
@@ -318,7 +322,7 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	 * @return dump string
 	 * @since 0.0.1
 	 */
-	public static String dump(final char[] array) { //$JUnit$
+	public static String dump(final char... array) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(array));
 		if (null == array) {
 			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$

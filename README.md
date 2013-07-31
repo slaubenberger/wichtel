@@ -1,4 +1,4 @@
-# wichtel 0.0.2
+# wichtel 0.1.0
 
 [Repository](http://repo.laubenberger.net/maven2/)
 
@@ -23,7 +23,7 @@ Just download the library from the **build** folder and add it to your project o
          <dependency>
             <groupId>net.laubenberger.wichtel</groupId>
             <artifactId>wichtel</artifactId>
-            <version>0.0.2</version>
+            <version>0.1.0</version>
             <scope>compile</scope>
          </dependency>
          ...
@@ -34,3 +34,11 @@ none
 
 ## Notes
 none
+
+## Release notes ##
+
+### 0.1.0
+- wichtel is now GNU LGPL v3.0
+- Various code improvements
+
+`Version: 31.07.2013 16:30`

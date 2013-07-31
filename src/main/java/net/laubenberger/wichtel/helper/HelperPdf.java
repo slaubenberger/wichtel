@@ -2,26 +2,30 @@
  * Copyright (c) 2007-2013 by Stefan Laubenberger.
  *
  * "wichtel" is free software: you can redistribute it and/or modify
- * it under the terms of the General Public License v2.0.
+ * it under the terms of the GNU Lesser General Public License v3.0.
  *
  * "wichtel" is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * See the GNU General Public License for more details:
- * <http://www.gnu.org/licenses>
+ * See the GNU Lesser General Public License for more details:
+ * -----------------------------------------------------------
+ * http://www.gnu.org/licenses
+ *
  *
  * This distribution is available at:
- * <https://github.com/slaubenberger/wichtel/>
+ * ----------------------------------
+ * https://github.com/slaubenberger/wichtel/
+ *
  *
  * Contact information:
+ * --------------------
  * Stefan Laubenberger
  * Bullingerstrasse 53
  * CH-8004 Zuerich
  *
- * <http://www.laubenberger.net>
- *
- * <laubenberger@gmail.com>
+ * http://www.laubenberger.net
+ * laubenberger@gmail.com
  */
 
 package net.laubenberger.wichtel.helper;
@@ -68,7 +72,7 @@ import com.lowagie.text.pdf.parser.PdfTextExtractor;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.0.2, 2013-03-14
+ * @version 0.1.0, 2013-07-31
  * @since 0.0.1
  */
 public abstract class HelperPdf {
@@ -383,8 +387,8 @@ public abstract class HelperPdf {
 		}
 
 		try (FileOutputStream fos = new FileOutputStream(dest)){
-			PdfReader reader = new PdfReader(source.getAbsolutePath());
-			PdfStamper stamper = new PdfStamper(reader, fos);
+			final PdfReader reader = new PdfReader(source.getAbsolutePath());
+			final PdfStamper stamper = new PdfStamper(reader, fos);
 
 			final HashMap<String, String> info = reader.getInfo();
 			info.putAll(metadata);
@@ -446,7 +450,7 @@ public abstract class HelperPdf {
 	 * @throws IOException
 	 * @since 0.0.1
 	 */
-	public static void encrypt(final File source, final File dest, final byte[] user, final byte[] password)
+	public static void encrypt(final File source, final File dest, final byte[] user, final byte... password)
 			throws IOException, DocumentException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, user, password));
 		if (null == source) {
@@ -500,7 +504,7 @@ public abstract class HelperPdf {
 	 * @throws IOException
 	 * @since 0.0.1
 	 */
-	public static void decrypt(final File source, final File dest, final byte[] password) throws IOException,
+	public static void decrypt(final File source, final File dest, final byte... password) throws IOException,
 			DocumentException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, password));
 
@@ -522,7 +526,7 @@ public abstract class HelperPdf {
 	 * @throws IOException
 	 * @since 0.0.1
 	 */
-	public static void lock(final File source, final File dest, final byte[] password)
+	public static void lock(final File source, final File dest, final byte... password)
 			throws IOException, DocumentException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, password));
 		if (null == source) {
@@ -568,7 +572,7 @@ public abstract class HelperPdf {
 	 * @throws IOException
 	 * @since 0.0.1
 	 */
-	public static void unlock(final File source, final File dest, final byte[] password) throws IOException,
+	public static void unlock(final File source, final File dest, final byte... password) throws IOException,
 			DocumentException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, password));
 		if (null == source) {

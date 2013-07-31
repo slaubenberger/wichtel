@@ -2,30 +2,35 @@
  * Copyright (c) 2007-2013 by Stefan Laubenberger.
  *
  * "wichtel" is free software: you can redistribute it and/or modify
- * it under the terms of the General Public License v2.0.
+ * it under the terms of the GNU Lesser General Public License v3.0.
  *
  * "wichtel" is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * See the GNU General Public License for more details:
- * <http://www.gnu.org/licenses>
+ * See the GNU Lesser General Public License for more details:
+ * -----------------------------------------------------------
+ * http://www.gnu.org/licenses
+ *
  *
  * This distribution is available at:
- * <https://github.com/slaubenberger/wichtel/>
+ * ----------------------------------
+ * https://github.com/slaubenberger/wichtel/
+ *
  *
  * Contact information:
+ * --------------------
  * Stefan Laubenberger
  * Bullingerstrasse 53
  * CH-8004 Zuerich
  *
- * <http://www.laubenberger.net>
- *
- * <laubenberger@gmail.com>
+ * http://www.laubenberger.net
+ * laubenberger@gmail.com
  */
 
 package net.laubenberger.wichtel.helper;
 
+import java.awt.*;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -48,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * Helper for various environment informations (e.g. OS, VM)
  *
  * @author Stefan Laubenberger
- * @version 0.0.2, 2013-03-14
+ * @version 0.1.0, 2013-07-31
  * @since 0.0.1
  */
 public abstract class HelperEnvironment {
@@ -496,106 +501,133 @@ public abstract class HelperEnvironment {
 		return result;
 	}
 
-	/**
-	 * Returns a report about the current Java environment.
-	 *
-	 * @return report about the current Java environment
-	 * @since 0.0.1
-	 */
-	public static Map<String, Object> getReportJava() { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-		
-		final Map<String, Object> result = new HashMap<>();
-		
-		result.put("version", getJavaVersion()); //$NON-NLS-1$
-		result.put("vendor", getJavaVendor()); //$NON-NLS-1$
-		result.put("VM name", getJavaVmName()); //$NON-NLS-1$
-		result.put("VM version", getJavaVmVersion()); //$NON-NLS-1$
-		result.put("Java properties", HelperMap.dump(getJavaProperties())); //$NON-NLS-1$
-		result.put("class path", getClassPath()); //$NON-NLS-1$
-		result.put("library path", getLibraryPath()); //$NON-NLS-1$
+    /**
+     * Returns a report about the current Java environment.
+     *
+     * @return report about the current Java environment
+     * @since 0.0.1
+     */
+    public static Map<String, String> getReportJava() { //$JUnit$
+        if (log.isDebugEnabled()) {
+            log.debug(HelperLog.methodStart());
+        }
 
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
-	}
+        final Map<String, String> result = new HashMap<>();
 
-	/**
-	 * Returns a report about the current operating system.
-	 *
-	 * @return report about the current operating system
-	 * @since 0.0.1
-	 */
-	public static Map<String, Object> getReportOS() { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-		
-		final Map<String, Object> result = new HashMap<>();
-		
-		result.put("platform", getPlatform()); //$NON-NLS-1$
-		result.put("name", getOsName()); //$NON-NLS-1$
-		result.put("version", getOsVersion()); //$NON-NLS-1$
-		result.put("architecture", getOsArch()); //$NON-NLS-1$
-		result.put("temporary directory", getOsTempDirectory()); //$NON-NLS-1$
-		result.put("environment variables", HelperMap.dump(getOsEnvironmentVariables())); //$NON-NLS-1$
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
-	}
+        result.put("version", getJavaVersion()); //$NON-NLS-1$
+        result.put("vendor", getJavaVendor()); //$NON-NLS-1$
+        result.put("VM name", getJavaVmName()); //$NON-NLS-1$
+        result.put("VM version", getJavaVmVersion()); //$NON-NLS-1$
+        result.put("Java properties", HelperMap.dump(getJavaProperties())); //$NON-NLS-1$
+        result.put("class path", getClassPath()); //$NON-NLS-1$
+        result.put("library path", getLibraryPath()); //$NON-NLS-1$
 
-	/**
-	 * Returns a report about the current user.
-	 *
-	 * @return report about the current user
-	 * @since 0.0.1
-	 */
-	public static Map<String, Object> getReportUser() { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-		
-		final Map<String, Object> result = new HashMap<>();
-		
-		result.put("name", getUserName()); //$NON-NLS-1$
-		result.put("home directory", getUserHomeDirectory()); //$NON-NLS-1$
-		result.put("directory", getUserDirectory()); //$NON-NLS-1$
-		result.put("country", getUserCountry()); //$NON-NLS-1$
-		result.put("language", getUserLanguage()); //$NON-NLS-1$
-		result.put("timezone", getUserTimezone()); //$NON-NLS-1$
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
-	}
+        if (log.isDebugEnabled()) {
+            log.debug(HelperLog.methodExit(result));
+        }
+        return result;
+    }
 
-	/**
-	 * Returns a report about the current system environment.
-	 *
-	 * @return report about the current system environment
-	 * @since 0.0.1
-	 */
-	public static Map<String, Object> getReportSystem() { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-		
-		final Map<String, Object> result = new HashMap<>();
-		
-		result.put("processors/cores", getAvailableProcessors()); //$NON-NLS-1$
-		if (null != HelperScreen.getCurrentScreenSize()) result.put("current screen size", HelperScreen.getCurrentScreenSize()); //$NON-NLS-1$
-		if (null != HelperScreen.getCurrentColorModel()) result.put("current color model", HelperScreen.getCurrentColorModel()); //$NON-NLS-1$
-		if (0 < HelperScreen.getCurrentScreenResolution()) result.put("current screen resolution", HelperScreen.getCurrentScreenResolution() + " DPI"); //$NON-NLS-1$ //$NON-NLS-2$
-		result.put("memory maximum", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryMax()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
-		result.put("memory total", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryTotal()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
-		result.put("memory free", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryFree()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
-		result.put("memory used", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryUsed()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
+    /**
+     * Returns a report about the current operating system.
+     *
+     * @return report about the current operating system
+     * @since 0.0.1
+     */
+    public static Map<String, String> getReportOS() { //$JUnit$
+        if (log.isDebugEnabled()) {
+            log.debug(HelperLog.methodStart());
+        }
 
-		final List<File> files = HelperIO.getAvailableDrives();
+        final Map<String, String> result = new HashMap<>();
 
-		for (final File root : files) {
+        result.put("platform", getPlatform().toString()); //$NON-NLS-1$
+        result.put("name", getOsName()); //$NON-NLS-1$
+        result.put("version", getOsVersion()); //$NON-NLS-1$
+        result.put("architecture", getOsArch()); //$NON-NLS-1$
+        result.put("temporary directory", getOsTempDirectory().getAbsolutePath()); //$NON-NLS-1$
+        result.put("environment variables", HelperMap.dump(getOsEnvironmentVariables())); //$NON-NLS-1$
 
-			result.put("drive" + root.getName() + " path", root.getAbsolutePath()); //$NON-NLS-1$ //$NON-NLS-2$
-			result.put("drive" + root.getName() + " space total", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceTotal(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			result.put("drive" + root.getName() + " space free", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceFree(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			result.put("drive" + root.getName() + " space used", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceUsed(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		}
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
-	}	
+        if (log.isDebugEnabled()) {
+            log.debug(HelperLog.methodExit(result));
+        }
+        return result;
+    }
+
+    /**
+     * Returns a report about the current user.
+     *
+     * @return report about the current user
+     * @since 0.0.1
+     */
+    public static Map<String, String> getReportUser() { //$JUnit$
+        if (log.isDebugEnabled()) {
+            log.debug(HelperLog.methodStart());
+        }
+
+        final Map<String, String> result = new HashMap<>();
+
+        result.put("name", getUserName()); //$NON-NLS-1$
+        result.put("home directory", getUserHomeDirectory().getAbsolutePath()); //$NON-NLS-1$
+        result.put("directory", getUserDirectory().getAbsolutePath()); //$NON-NLS-1$
+        result.put("country", null == getUserCountry() ? "undefined" : getUserCountry().toString()); //$NON-NLS-1$
+        result.put("language", null == getUserLanguage() ? "undefined" : getUserLanguage().toString()); //$NON-NLS-1$
+        result.put("timezone", null == getUserTimezone() ? "undefined" : getUserTimezone().toString()); //$NON-NLS-1$
+
+        if (log.isDebugEnabled()) {
+            log.debug(HelperLog.methodExit(result));
+        }
+        return result;
+    }
+
+    /**
+     * Returns a report about the current system environment.
+     *
+     * @return report about the current system environment
+     * @since 0.0.1
+     */
+    public static Map<String, String> getReportSystem() { //$JUnit$
+        if (log.isDebugEnabled()) {
+            log.debug(HelperLog.methodStart());
+        }
+
+        final Map<String, String> result = new HashMap<>();
+
+        result.put("processors/cores", Integer.toString(getAvailableProcessors())); //$NON-NLS-1$
+        try {
+            if (null != Toolkit.getDefaultToolkit().getScreenSize()) {
+                result.put("current screen size", Toolkit.getDefaultToolkit().getScreenSize().toString()); //$NON-NLS-1$
+            }
+            if (null != Toolkit.getDefaultToolkit().getColorModel()) {
+                result.put("current color model", Toolkit.getDefaultToolkit().getColorModel().toString()); //$NON-NLS-1$
+            }
+            if (0 < Toolkit.getDefaultToolkit().getScreenResolution()) {
+                result.put("current screen resolution", Toolkit.getDefaultToolkit().getScreenResolution() + " DPI"); //$NON-NLS-1$ //$NON-NLS-2$
+            }
+        } catch (HeadlessException ex) {
+            //do nothing - this usually happens on a server without display
+        }
+        result.put("memory maximum", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryMax()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
+        result.put("memory total", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryTotal()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
+        result.put("memory free", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryFree()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
+        result.put("memory used", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryUsed()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
+
+        final List<File> files = HelperIO.getAvailableDrives();
+
+        for (final File root : files) {
+
+            result.put("drive '" + root + "' path", root.getAbsolutePath()); //$NON-NLS-1$ //$NON-NLS-2$
+            result.put("drive '" + root + "' space total", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceTotal(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            result.put("drive '" + root + "' space free", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceFree(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            result.put("drive '" + root + "' space used", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceUsed(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        }
+
+        if (log.isDebugEnabled()) {
+            log.debug(HelperLog.methodExit(result));
+        }
+        return result;
+    }
+
 
 	/*
 	 * Private methods
