@@ -1,15 +1,60 @@
-target
-/.idea
-/.settings
-/*.iml
-/.idea_modules
-/.classpath
-/.project
+#---------------------------------------------------------------------------
+# Ignore file for git
+#---------------------------------------------------------------------------
+#  Project:       wichtel
+#  Author:        Stefan Laubenberger (las)
+#  Created:       31.07.2013
+#---------------------------------------------------------------------------
+# History:
+#  Date:       Who:  What:
+#  31.07.2013  las   Initial release
+#-----------------------------------------------------------------------------
+        
+# Generic files to ignore
+*~
+*.lock
+*.DS_Store
+*swp
+*.out
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.log
+*.tmp
+*.bak
+
+# Other vcs
+.svn
+.svnignore
+CVS/
+.cvsignore
+
+# Enterprise Architect specific
+*.ldb
+
+# Java specific
+*.class
+
+# Build (Maven) specific
+target/
+
+# IntelliJ specific
+workspace.xml
+*.iws
+
+# Eclipse specific
+.settings/
+.metadata
+.classpath
+.project
+*.launch
+
+# Netbeans specific
+*~.nib
+
+# Project specific
 /doc/javadoc
 
-# Linux specific
-*swp
-
-# Mac specific
-.DS_Store
 
