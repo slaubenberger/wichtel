@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
  * This class provides functions to connect and execute statements on SQL-Server.
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.1.5, 2014-05-08
  * @since 0.0.1
  */
 public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
@@ -165,9 +165,9 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 */
 	public void setUser(final String user) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(user));
-		if (null == user) {
-			throw new RuntimeExceptionIsNull("user"); //$NON-NLS-1$
-		}
+//		if (null == user) {
+//			throw new RuntimeExceptionIsNull("user"); //$NON-NLS-1$
+//		}
 
 		this.user = user;
 
@@ -182,9 +182,9 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 */
 	public void setPassword(final String password) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(password));
-		if (null == password) {
-			throw new RuntimeExceptionIsNull("password"); //$NON-NLS-1$
-		}
+//		if (null == password) {
+//			throw new RuntimeExceptionIsNull("password"); //$NON-NLS-1$
+//		}
 
 		this.password = password;
 

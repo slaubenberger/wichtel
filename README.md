@@ -1,6 +1,4 @@
-# wichtel 0.1.0
-
-[Repository](http://repo.laubenberger.net/maven2/)
+# wichtel 0.1.5
 
 ## Description
 A small Java7+ library to help you build even better and faster applications.  
@@ -35,10 +33,19 @@ none
 ## Notes
 none
 
+## Links
+### Repo
+- [Github Repo](https://github.com/slaubenberger/wichtel)
+- [Maven Repo](http://repo.laubenberger.net/maven2/)
+
 ## Release notes ##
+
+### 0.1.5
+- ProviderSQL improved
+- newest dependencies added
 
 ### 0.1.0
 - wichtel is now GNU LGPL v3.0
 - Various code improvements
 
-`Version: 31.07.2013 16:30`
+`Version: 08.05.2014 16:22`

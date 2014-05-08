@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * Collected constants of very general utility.
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.1.5, 2013-07-31
  * @since 0.0.1
  */
 public abstract class Constants {
@@ -72,12 +72,17 @@ public abstract class Constants {
 //	public static final String PLUS_SIGN = "+"; //$NON-NLS-1$
 //	public static final String NEGATIVE_SIGN = "-"; //$NON-NLS-1$
 
-	//constants
+	//physic constants
 	public static final BigDecimal SPEED_OF_LIGHT = new BigDecimal("299792458"); //speed of light in m/s //$NON-NLS-1$
 	public static final BigDecimal ABSOLUTE_ZERO = new BigDecimal("-273.15"); //absolute zero in Celsius //$NON-NLS-1$
 	public static final BigDecimal GRAVITY_ON_EARTH = new BigDecimal("9.806"); //gravity on earth in m/s^2 //$NON-NLS-1$
+    public static final BigDecimal FACTOR_KCAL_TO_KJ = new BigDecimal("4.184"); //kilogram calorie to kilojoule //$NON-NLS-1$
 
-	//encodings
+    ///math constants
+    public static final BigDecimal FACTOR_SQRT_2 = new BigDecimal("1.41421356"); //Square root of 2
+    public static final BigDecimal FACTOR_GOLDEN_RATIO_A_TO_B = new BigDecimal("1.6180339887"); //golden ratio between a and b //$NON-NLS-1$
+
+    //encodings
 	public static final String ENCODING_UTF8 = "UTF-8"; //$NON-NLS-1$
 	public static final String ENCODING_UTF16 = "UTF-16"; //$NON-NLS-1$
 	public static final String ENCODING_ISO8859_1 = "ISO-8859-1"; //$NON-NLS-1$
@@ -87,10 +92,6 @@ public abstract class Constants {
 	/*
 	 * factors
 	 */
-	//various
-	public static final BigDecimal FACTOR_GOLDEN_RATIO_A_TO_B = new BigDecimal("1.6180339887"); //golden ratio between a and b //$NON-NLS-1$
-	public static final BigDecimal FACTOR_KCAL_TO_KJ = new BigDecimal("4.184"); //kilogram calorie to kilojoule //$NON-NLS-1$
-
 	//area
 	public static final BigDecimal FACTOR_MM2_TO_CM2 = HelperNumber.NUMBER_100; //millimeters^2 to centimeters^2
 	public static final BigDecimal FACTOR_CM2_TO_M2 = HelperNumber.NUMBER_10000; //centimeters^2 to meters^2
@@ -178,10 +179,10 @@ public abstract class Constants {
 	static {
 		try {
 			WICHTEL.setName("wichtel"); //$NON-NLS-1$
-			WICHTEL.setVersion("0.1.0"); //$NON-NLS-1$
-			WICHTEL.setBuild(2);
+			WICHTEL.setVersion("0.1.5"); //$NON-NLS-1$
+			WICHTEL.setBuild(3);
 			WICHTEL.setCreated(HelperTime.getDate(2013, 3, 5, 22, 50, 0));
-			WICHTEL.setChanged(HelperTime.getDate(2013, 7, 31, 16, 50, 0));
+			WICHTEL.setChanged(HelperTime.getDate(2014, 5, 8, 16, 02, 0));
 			WICHTEL.setLanguage(Language.ENGLISH);
 			WICHTEL.setUUID(UUID.fromString("6e9ed2f6-2ef0-4786-8584-01727e5bc553")); //$NON-NLS-1$
 			WICHTEL.setUrl(new URL("http://www.laubenberger.net/")); //$NON-NLS-1$

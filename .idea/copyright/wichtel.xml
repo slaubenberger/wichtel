@@ -1,9 +1,0 @@
-<component name="CopyrightManager">
-  <copyright>
-    <option name="notice" value="Copyright (c) 2007-2013 by Stefan Laubenberger.&#10;&#10;&quot;wichtel&quot; is free software: you can redistribute it and/or modify&#10;it under the terms of the GNU Lesser General Public License v3.0.&#10;&#10;&quot;wichtel&quot; is distributed in the hope that it will be useful,&#10;but WITHOUT ANY WARRANTY; without even the implied warranty of&#10;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&#10;&#10;See the GNU Lesser General Public License for more details:&#10;-----------------------------------------------------------&#10;http://www.gnu.org/licenses&#10;&#10;&#10;This distribution is available at:&#10;----------------------------------&#10;https://github.com/slaubenberger/wichtel/&#10;&#10;&#10;Contact information:&#10;--------------------&#10;Stefan Laubenberger&#10;Bullingerstrasse 53&#10;CH-8004 Zuerich&#10;&#10;http://www.laubenberger.net&#10;laubenberger@gmail.com" />
-    <option name="keyword" value="Copyright" />
-    <option name="allowReplaceKeyword" value="GNU" />
-    <option name="myName" value="wichtel" />
-    <option name="myLocal" value="true" />
-  </copyright>
-</component>
