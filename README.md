@@ -21,7 +21,7 @@ Just download the library from the **build** folder and add it to your project o
          <dependency>
             <groupId>net.laubenberger.wichtel</groupId>
             <artifactId>wichtel</artifactId>
-            <version>0.1.0</version>
+            <version>0.1.5</version>
             <scope>compile</scope>
          </dependency>
          ...
@@ -48,4 +48,4 @@ none
 - wichtel is now GNU LGPL v3.0
 - Various code improvements
 
-`Version: 08.05.2014 16:22`
+`Version: 09.05.2014 00:55`
