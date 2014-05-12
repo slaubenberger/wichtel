@@ -53,10 +53,10 @@ import org.slf4j.LoggerFactory;
  * Helper class for time operations.
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperTime {
+public final class HelperTime {
 	private static final Logger log = LoggerFactory.getLogger(HelperTime.class);
 
 	public static final int MAX_SECOND_VALUE = 59;
@@ -83,7 +83,10 @@ public abstract class HelperTime {
 
 	private static final int TIMEOUT = 5000;
 
-	
+    private HelperTime() {
+        //do nothing
+    }
+
 	/**
 	 * Returns the current atomic time of the default time server.
 	 * Uses the time protocol specified in Internet time standard RFC-868.

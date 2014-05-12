@@ -35,10 +35,10 @@ package net.laubenberger.wichtel.helper;
  * Helper class for logging.
  * 
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperLog {
+public final class HelperLog {
 	private static final String ID_APPLICATION_START = "+++"; //$NON-NLS-1$
 	private static final String ID_APPLICATION_EXIT = "---"; //$NON-NLS-1$
 	private static final String ID_METHOD_START = ">>>"; //$NON-NLS-1$
@@ -49,6 +49,10 @@ public abstract class HelperLog {
 
 	private static final String NULL = " null"; //$NON-NLS-1$
 	private static final String EMPTY = " empty"; //$NON-NLS-1$
+
+    private HelperLog() {
+        //do nothing
+    }
 
 	public static String applicationStart(final String name, final String version) { // $JUnit$
 		final StringBuilder sb = new StringBuilder();

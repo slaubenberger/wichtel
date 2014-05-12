@@ -47,10 +47,10 @@ import org.slf4j.LoggerFactory;
  * Helper class for arrays.
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperArray { //TODO implement all methods for all primitive types
+public final class HelperArray { //TODO implement all methods for all primitive types
 	private static final Logger log = LoggerFactory.getLogger(HelperArray.class);
 
 	public static final Class<?>[] EMPTY_ARRAY_CLASS = new Class[0];
@@ -66,6 +66,10 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	public static final Short[] EMPTY_ARRAY_SHORT = new Short[0];
 	public static final BigInteger[] EMPTY_ARRAY_BIG_INTEGER = new BigInteger[0];
 	public static final BigDecimal[] EMPTY_ARRAY_BIG_DECIMAL = new BigDecimal[0];
+
+    private HelperArray() {
+        //do nothing
+    }
 
 	/**
 	 * Checks if an array is valid.

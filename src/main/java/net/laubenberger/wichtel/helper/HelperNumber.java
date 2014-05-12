@@ -44,10 +44,10 @@ import org.slf4j.LoggerFactory;
  * Helper class for numbers.
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperNumber {
+public final class HelperNumber {
 	private static final Logger log = LoggerFactory.getLogger(HelperNumber.class);
 
 	public static final BigDecimal NUMBER_8 = new BigDecimal("8"); //$NON-NLS-1$
@@ -74,6 +74,9 @@ public abstract class HelperNumber {
 	public static final BigDecimal NUMBER_262144 = new BigDecimal("262144"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_16777216 = new BigDecimal("16777216"); //$NON-NLS-1$
 
+    private HelperNumber() {
+        //do nothing
+    }
 
 	/**
 	 * Multiply 1-n values together.

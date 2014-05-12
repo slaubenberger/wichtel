@@ -53,11 +53,15 @@ import org.slf4j.LoggerFactory;
  * Helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperCompress {
+public final class HelperCompress {
 	private static final Logger log = LoggerFactory.getLogger(HelperCompress.class);
+
+    private HelperCompress() {
+        //do nothing
+    }
 
 	/**
 	 * Writes a ZIP {@link File} containing a list of {@link File}.

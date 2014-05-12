@@ -72,15 +72,19 @@ import com.lowagie.text.pdf.parser.PdfTextExtractor;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperPdf {
+public final class HelperPdf {
 	private static final Logger log = LoggerFactory.getLogger(HelperPdf.class);
 
 	private static final String IMAGE_TYPE = HelperImage.TYPE_PNG;
 
 	//TODO write PDF from word/excel etc.
+
+    private HelperPdf() {
+        //do nothing
+    }
 	
 //	/**
 //	 * Writes a PDF from multiple (X)HTML files to a {@link File}.

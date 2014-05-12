@@ -71,14 +71,18 @@ import org.slf4j.LoggerFactory;
  * Helper class for disk I/O.
  * 
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperIO {
+public final class HelperIO {
 	private static final Logger log = LoggerFactory.getLogger(HelperIO.class);
 
 	public static final String FILE_SEPARATOR = System.getProperty("file.separator"); //$NON-NLS-1$
 	public static final String PATH_SEPARATOR = System.getProperty("path.separator"); //$NON-NLS-1$
+
+    private HelperIO() {
+        //do nothing
+    }
 
 	/**
 	 * Returns a temporary {@link File} with a given name and extension.

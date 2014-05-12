@@ -45,11 +45,15 @@ import org.slf4j.LoggerFactory;
  * Helper class for maps.
  * 
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperMap {
+public final class HelperMap {
 	private static final Logger log = LoggerFactory.getLogger(HelperMap.class);
+
+    private HelperMap() {
+        //do nothing
+    }
 
 	/**
 	 * Checks if a {@link Map} is valid.

@@ -53,11 +53,15 @@ import org.slf4j.LoggerFactory;
  * Helper for various environment informations (e.g. OS, VM)
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperEnvironment {
+public final class HelperEnvironment {
 	private static final Logger log = LoggerFactory.getLogger(HelperEnvironment.class);
+
+    private HelperEnvironment() {
+        //do nothing
+    }
 
 	/**
 	 * Returns the used VM memory in bytes.

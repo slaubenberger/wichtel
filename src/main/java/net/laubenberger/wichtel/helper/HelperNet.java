@@ -58,10 +58,10 @@ import org.slf4j.LoggerFactory;
  * Helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperNet {
+public final class HelperNet {
 	private static final Logger log = LoggerFactory.getLogger(HelperNet.class);
 
 	public static final String PROPERTY_HTTP_PROXY_HOST = "http.proxyHost"; //$NON-NLS-1$
@@ -74,6 +74,10 @@ public abstract class HelperNet {
 	public static final String PROPERTY_FTP_PROXY_PORT = "ftp.proxyPort"; //$NON-NLS-1$
 
 	private static final int TIMEOUT = 2000;
+
+    private HelperNet() {
+        //do nothing
+    }
 
 	/**
 	 * Enable VM wide use of a proxy for HTTP.

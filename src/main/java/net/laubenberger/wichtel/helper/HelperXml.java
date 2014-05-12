@@ -54,11 +54,15 @@ import org.slf4j.LoggerFactory;
  * Helper class for XML operations.
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperXml {
+public final class HelperXml {
 	private static final Logger log = LoggerFactory.getLogger(HelperXml.class);
+
+    private HelperXml() {
+        //do nothing
+    }
 
 	/**
 	 * This method ensures that the output String has only valid XML unicode characters as specified by the XML 1.0 standard.

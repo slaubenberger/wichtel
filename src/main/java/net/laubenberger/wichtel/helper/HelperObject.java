@@ -56,11 +56,15 @@ import org.slf4j.LoggerFactory;
  * Helper class for objects.
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperObject {
+public final class HelperObject {
 	private static final Logger log = LoggerFactory.getLogger(HelperObject.class);
+
+    private HelperObject() {
+        //do nothing
+    }
 
 	/**
 	 * Creates an instance of a class.

@@ -38,11 +38,15 @@ import org.slf4j.LoggerFactory;
  * Helper class for keyboards.
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperKeyboard {
+public final class HelperKeyboard {
 	private static final Logger log = LoggerFactory.getLogger(HelperKeyboard.class);
+
+    private HelperKeyboard() {
+        //do nothing
+    }
 
 	/**
 	 * Checks if a key code is printable.

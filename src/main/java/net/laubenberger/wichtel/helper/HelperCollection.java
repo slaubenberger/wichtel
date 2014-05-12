@@ -48,11 +48,15 @@ import org.slf4j.LoggerFactory;
  * Helper class for collections.
  * 
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperCollection {
+public final class HelperCollection {
 	private static final Logger log = LoggerFactory.getLogger(HelperCollection.class);
+
+    private HelperCollection() {
+        //do nothing
+    }
 
 	/**
 	 * Checks if a {@link Collection} is valid.

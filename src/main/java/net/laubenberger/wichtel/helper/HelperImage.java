@@ -63,10 +63,10 @@ import org.slf4j.LoggerFactory;
  * Helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperImage {
+public final class HelperImage {
 	private static final Logger log = LoggerFactory.getLogger(HelperImage.class);
 
 	public static final String TYPE_JPG = "jpg"; //$NON-NLS-1$
@@ -74,6 +74,9 @@ public abstract class HelperImage {
 	public static final String TYPE_GIF = "gif"; //$NON-NLS-1$
 	public static final String TYPE_BMP = "bmp"; //$NON-NLS-1$
 
+    private HelperImage() {
+        //do nothing
+    }
 
 	/**
 	 * Reads an image from a {@link File} to a {@link BufferedImage}.

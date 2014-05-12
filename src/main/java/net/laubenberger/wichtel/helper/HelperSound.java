@@ -64,11 +64,15 @@ import org.slf4j.LoggerFactory;
  * THelper class for sound operations.
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperSound {
+public final class HelperSound {
 	private static final Logger log = LoggerFactory.getLogger(HelperSound.class);
+
+    private HelperSound() {
+        //do nothing
+    }
 
 	/**
 	 * Returns an audio {@link Clip} from a {@link File} (allowed types are wav, au, aifc, snd and aiff).

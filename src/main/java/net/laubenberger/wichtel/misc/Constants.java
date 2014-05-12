@@ -51,10 +51,10 @@ import org.slf4j.LoggerFactory;
  * Collected constants of very general utility.
  *
  * @author Stefan Laubenberger
- * @version 0.1.5, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class Constants {
+public final class Constants {
 	private static final Logger log = LoggerFactory.getLogger(Constants.class);
 
 	//wichtel specific
@@ -179,10 +179,10 @@ public abstract class Constants {
 	static {
 		try {
 			WICHTEL.setName("wichtel"); //$NON-NLS-1$
-			WICHTEL.setVersion("0.1.5"); //$NON-NLS-1$
-			WICHTEL.setBuild(3);
+			WICHTEL.setVersion("0.2.0"); //$NON-NLS-1$
+			WICHTEL.setBuild(4);
 			WICHTEL.setCreated(HelperTime.getDate(2013, 3, 5, 22, 50, 0));
-			WICHTEL.setChanged(HelperTime.getDate(2014, 5, 8, 16, 02, 0));
+			WICHTEL.setChanged(HelperTime.getDate(2014, 5, 12, 15, 23, 0));
 			WICHTEL.setLanguage(Language.ENGLISH);
 			WICHTEL.setUUID(UUID.fromString("6e9ed2f6-2ef0-4786-8584-01727e5bc553")); //$NON-NLS-1$
 			WICHTEL.setUrl(new URL("http://www.laubenberger.net/")); //$NON-NLS-1$
@@ -191,4 +191,8 @@ public abstract class Constants {
 			log.error("URL invalid", ex); //$NON-NLS-1$
 		}
 	}
+
+    private Constants() {
+        //do nothing
+    }
 }

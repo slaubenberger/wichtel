@@ -54,11 +54,15 @@ import org.slf4j.LoggerFactory;
  * Helper class for Swing.
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperSwing {
+public final class HelperSwing {
 	private static final Logger log = LoggerFactory.getLogger(HelperSwing.class);
+
+    private HelperSwing() {
+        //do nothing
+    }
 
 	/**
 	 * Sets the menu on MacOSX to the standard style.

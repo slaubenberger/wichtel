@@ -1,4 +1,4 @@
-# wichtel 0.1.5
+# wichtel 0.2.0
 
 ## Description
 A small Java7+ library to help you build even better and faster applications.  
@@ -21,7 +21,7 @@ Just download the library from the **build** folder and add it to your project o
          <dependency>
             <groupId>net.laubenberger.wichtel</groupId>
             <artifactId>wichtel</artifactId>
-            <version>0.1.5</version>
+            <version>0.2.0</version>
             <scope>compile</scope>
          </dependency>
          ...
@@ -39,6 +39,10 @@ none
 - [Maven Repo](http://repo.laubenberger.net/maven2/)
 
 ## Release notes ##
+
+### 0.2.0
+- HelperMath: getRandom() extended with double and range
+- Refactoring
 
 ### 0.1.5
 - ProviderSQL improved

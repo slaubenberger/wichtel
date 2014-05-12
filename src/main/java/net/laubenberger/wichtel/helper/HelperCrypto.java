@@ -54,10 +54,10 @@ import org.slf4j.LoggerFactory;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperCrypto {
+public final class HelperCrypto {
 	public static final Provider DEFAULT_PROVIDER = new BouncyCastleProvider(); //BouncyCastle
 
 	private static final Logger log = LoggerFactory.getLogger(HelperCrypto.class);
@@ -66,7 +66,11 @@ public abstract class HelperCrypto {
 	static {
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 	}
-	
+
+    private HelperCrypto() {
+        //do nothing
+    }
+
 	/**
 	 * Generates an unique {@link String} with a given seed.
 	 * This is used for unique keys (e.g. for product keys).

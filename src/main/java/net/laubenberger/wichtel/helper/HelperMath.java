@@ -48,11 +48,15 @@ import org.slf4j.LoggerFactory;
  * Helper class for various math problems.
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
+public final class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
 	private static final Logger log = LoggerFactory.getLogger(HelperMath.class);
+
+    private HelperMath() {
+        //do nothing
+    }
 
 	/**
 	 * Returns the greatest common divisor of two given numbers.
@@ -275,21 +279,140 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 		return result;
 	}
 
-	/**
-	 * Returns a random integer between 0 and n-1.
+    /**
+     * Returns a random int between 0 and n-1.
+     *
+     * @param n int-Value
+     * @return random int-value between 0 and n-1
+     * @since 0.0.1
+     */
+    public static int getRandom(final int n) { //$JUnit$
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
+
+        if (0 > n) {
+            throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
+        }
+
+        final int result = (int) (StrictMath.random() * n);
+
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+        return result;
+    }
+
+    /**
+	 * Returns a random long between 0 and n-1.
 	 *
-	 * @param n int-Value
-	 * @return random int-value between 0 and n-1
-	 * @since 0.0.1
+	 * @param n long-Value
+	 * @return random long-value between 0 and n-1
+	 * @since 0.2.0
 	 */
-	public static int getRandom(final int n) { //$JUnit$
+	public static long getRandom(final long n) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 
-		final int result = (int) (StrictMath.random() * n);
+        if (0L > n) {
+            throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
+        }
+
+        final long result = (long) (StrictMath.random() * n);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
+
+    /**
+     * Returns a random double between 0 and n-1.
+     *
+     * @param n double-Value
+     * @return random double-value between 0 and n-1
+     * @since 0.2.0
+     */
+    public static double getRandom(final double n) {
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
+
+        if (0D > n) {
+            throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
+        }
+
+        final double result = StrictMath.random() * n;
+
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+        return result;
+    }
+
+    /**
+     * Returns a random integer between start and end-1.
+     *
+     * @param start int start value
+     * @param end int end value
+     * @return random int-value between 0 and n-1
+     * @since 0.2.0
+     */
+    public static int getRandom(final int start, final int end) {
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(start, end));
+
+        if (start > end) {
+            throw new IllegalArgumentException("end value (" + end + ") must be greater than the start value (" + start + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
+        int result = -1;
+
+        while(result < start || result > end) {
+            result = getRandom(end);
+        }
+
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+        return result;
+    }
+
+    /**
+     * Returns a random long between start and end-1.
+     *
+     * @param start long start value
+     * @param end long end value
+     * @return random long-value between 0 and n-1
+     * @since 0.2.0
+     */
+    public static long getRandom(final long start, final long end) {
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(start, end));
+
+        if (start > end) {
+            throw new IllegalArgumentException("end value (" + end + ") must be greater than the start value (" + start + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
+        long result = -1;
+
+        while(result < start || result > end) {
+            result = getRandom(end);
+        }
+
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+        return result;
+    }
+
+    /**
+     * Returns a random double between start and end-1.
+     *
+     * @param start double start value
+     * @param end double end value
+     * @return random double-value between 0 and n-1
+     * @since 0.2.0
+     */
+    public static double getRandom(final double start, final double end) {
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(start, end));
+
+        if (start > end) {
+            throw new IllegalArgumentException("end value (" + end + ") must be greater than the start value (" + start + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
+        double result = -1f;
+
+        while(result < start || result > end) {
+            result = getRandom(end);
+        }
+
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+        return result;
+    }
 
 	/**
 	 * Returns the amount with a given start amount, interest and elapsed days.

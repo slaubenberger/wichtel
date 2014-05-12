@@ -46,10 +46,10 @@ import org.slf4j.LoggerFactory;
  * Helper class for strings.
  *
  * @author Stefan Laubenberger
- * @version 0.1.0, 2013-07-31
+ * @version 0.2.0, 2014-05-12
  * @since 0.0.1
  */
-public abstract class HelperString {
+public final class HelperString {
 	private static final Logger log = LoggerFactory.getLogger(HelperString.class);
 
 	public static final String NEW_LINE = System.lineSeparator();
@@ -80,7 +80,11 @@ public abstract class HelperString {
 	public static final String POWER_OF_3 = "³"; //$NON-NLS-1$
 
 	private static final Pattern PATTERN = Pattern.compile("[^0-9.]+"); //$NON-NLS-1$
-	
+
+    private HelperString() {
+        //do nothing
+    }
+
 	/**
 	 * Checks if a {@link CharSequence} is valid.
 	 *
